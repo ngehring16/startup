@@ -2,7 +2,7 @@
 
 [My Notes](notes.md)
 
-MovieMaze is a daily game akin to the wordle, involving connecting two films through commonalities in their year of release, director, or top billed actors. Players will have 10 films to construct a pathway or route, from the first film to the other.
+MovieMaze is a daily game akin to the wordle, involving connecting two films through commonalities in their year of release, director, or top billed actors. The next film guessed must have one of the three data in common with the previous entry. Players will have 10 films to construct a pathway or route, from the first film to the other. 
 
 > [!NOTE]
 > This is a template for your startup application. You must modify this `README.md` file for each phase of your development. You only need to fill in the section for each deliverable when that deliverable is submitted in Canvas. Without completing the section for a deliverable, the TA will not know what to look for when grading your submission. Feel free to add additional information to each deliverable description, but make sure you at least have the list of rubric items and a description of what you did for each item.
