@@ -16,8 +16,7 @@ Do you love movies and want to prove your cinefile knowledge to your friends and
 
 ### Design
 
-![Design image](<img width="2420" height="1668" alt="MOVIE_MAZE" src="https://github.com/user-attachments/assets/46839fde-0973-477c-beed-0e8ba15f01fc" />
-)
+![Design image](MOVIE_MAZE.png)
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
