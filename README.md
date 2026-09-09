@@ -18,35 +18,30 @@ Do you love movies and want to prove your cinefile knowledge to your friends and
 
 ![Design image](MOVIE_MAZE.png)
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+MovieMaze features a header with the title and options to login as well as view your high score. Below is a display featuring the movie puzzle of the day with the information for the two films. Below that is the Selection square featuring spaces for your 10 film guesses. Upon completion of the puzzle a pop up will appear displaying your score as well as the leaderboard with an option to share your score.
 
-```mermaid
-sequenceDiagram
-    actor You
-    actor Website
-    You->>Website: Replace this with your design
-```
 
 ### Key features
 
 - Secure Account that keeps track of high score
 - Randomized new film puzzle each day
 - Leaderboard displayable upon completion of daily puzzle updated in real time
-- Film data displayed upon entry
+- Film data from guess displayed upon entry
 
 ### Technologies
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Simple HTML structure using only one page.
+- **HTML** - Simple HTML structure using only one page. The header features options to view your high score as well as login. Also included are a display section for the daily puzzle, a guessing box for your ten guesses, and a pop up that appears upon completion displaying the leaderboard and your high score.
 - **CSS** - Page will be made up mostly of simple boxes and whitespace. Will use mostly black and white with green and red to indicate correct or incorrect choices.
-- **React** - Utilized for login, accessing leaderboard, imputing guesses, and sharing score upon completion of puzzle.
+- **React** - Utilized for login, accessing leaderboard, imputing guesses, and sharing score upon completion of puzzle. Selecting to view your high score also displays the leaderboard. Patrons will only have the ability to input guesses upon login.
 - **Service** - Backend service with endpoints for:
   - Login
   - Checking guesses
   - Retrieving leaderboard
-- **DB/Login** - Store users, past puzzles, and high scores in the database. Daily puzzle accessible upon authentication.
-- **WebSocket** - Daily Scores from each player are added to the leaderboard to update ranking.
+  - Retrieving movie information to select random puzzle and verify guesses from https://www.omdbapi.com/ public API.
+- **DB/Login** - Store users, past puzzles, and high scores in the database. Guess making only accessible upon authentication. Past puzzles referenced upon random selection to ensure a different puzzle each day. 
+- **WebSocket** - Daily Scores from each player are added to the leaderboard to update ranking in real time.
 
 ## 🚀 Specification Deliverable
 
@@ -55,12 +50,12 @@ I am going to use the required technologies in the following ways.
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Git commit requirement)
-- [ ] Proper use of Markdown
-- [ ] A concise and compelling elevator pitch
-- [ ] Description of key features
-- [ ] Description of how you will use each technology including your 3rd party API and use of WebSocket
-- [ ] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
+- [X] I completed the prerequisites for this deliverable (Git commit requirement)
+- [X] Proper use of Markdown
+- [X] A concise and compelling elevator pitch
+- [X] Description of key features
+- [X] Description of how you will use each technology including your 3rd party API and use of WebSocket
+- [X] One or more rough sketches of your application. Images must be embedded in this file using Markdown image references.
 
 ## 🚀 AWS deliverable
 
