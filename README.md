@@ -1,8 +1,8 @@
-# Your startup name here
+# MovieMaze
 
 [My Notes](notes.md)
 
-A brief description of the application here. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+MovieMaze is a daily game akin to the wordle, involving connecting two films through commonalities in their year of release, director, or top billed actors. Players will have 10 films to construct a pathway or route, from the first film to the other.
 
 > [!NOTE]
 > This is a template for your startup application. You must modify this `README.md` file for each phase of your development. You only need to fill in the section for each deliverable when that deliverable is submitted in Canvas. Without completing the section for a deliverable, the TA will not know what to look for when grading your submission. Feel free to add additional information to each deliverable description, but make sure you at least have the list of rubric items and a description of what you did for each item.
@@ -12,11 +12,12 @@ A brief description of the application here. Lorem ipsum dolor sit amet, consect
 
 ### Elevator pitch
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Do you love movies and want to prove your cinefile knowledge to your friends and acquaintances? With MovieMaze you and your friends can prove how much you know, solving a new route from film to film each day. A shorter route means more points and a higher spot on the updating leaderboard. If you fail to find a route after 10 films, you're out; try again tomorrow! MovieMaze is a fun, simple, and exciting new take on the daily brainteaser games you know and love, only now with a cinematic twist.
 
 ### Design
 
-![Design image](placeholder.png)
+![Design image](<img width="2420" height="1668" alt="MOVIE_MAZE" src="https://github.com/user-attachments/assets/46839fde-0973-477c-beed-0e8ba15f01fc" />
+)
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
@@ -29,20 +30,24 @@ sequenceDiagram
 
 ### Key features
 
-- Describe your key feature
-- Describe your key feature
-- Describe your key feature
+- Secure Account that keeps track of high score
+- Randomized new film puzzle each day
+- Leaderboard displayable upon completion of daily puzzle updated in real time
+- Film data displayed upon entry
 
 ### Technologies
 
 I am going to use the required technologies in the following ways.
 
-- **HTML** - Description here
-- **CSS** - Description here
-- **React** - Description here
-- **Service** - Description here
-- **DB/Login** - Description here
-- **WebSocket** - Description here
+- **HTML** - Simple HTML structure using only one page.
+- **CSS** - Page will be made up mostly of simple boxes and whitespace. Will use mostly black and white with green and red to indicate correct or incorrect choices.
+- **React** - Utilized for login, accessing leaderboard, imputing guesses, and sharing score upon completion of puzzle.
+- **Service** - Backend service with endpoints for:
+  - Login
+  - Checking guesses
+  - Retrieving leaderboard
+- **DB/Login** - Store users, past puzzles, and high scores in the database. Daily puzzle accessible upon authentication.
+- **WebSocket** - Daily Scores from each player are added to the leaderboard to update ranking.
 
 ## 🚀 Specification Deliverable
 
