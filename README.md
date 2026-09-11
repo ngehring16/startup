@@ -63,7 +63,7 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 - [X] **Rented EC2 server** - I did not complete this part of the deliverable.
 - [X] **Leased domain name** - I did not complete this part of the deliverable.
-- [X] **Server accessible** from my domain: [https://yourdomainnamehere.click](https://moviemaze.click/)
+- [X] **Server accessible** from my domain: [https://moviemaze.click](https://moviemaze.click/)
 
 ## 🚀 HTML deliverable
 
