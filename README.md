@@ -2,7 +2,7 @@
 
 [My Notes](notes.md)
 
-MovieMaze is a daily game akin to the wordle, involving connecting two films through commonalities in their year of release, director, or top billed actors. The next film guessed must have one of the three data in common with the previous entry. Players will have 10 films to construct a pathway or route, from the first film to the other. 
+MovieMaze(https://startup.moviemaze.click/index.html) is a daily game akin to the wordle, involving connecting two films through commonalities in their year of release, director, or top billed actors. The next film guessed must have one of the three data in common with the previous entry. Players will have 10 films to construct a pathway or route, from the first film to the other. 
 
 > [!NOTE]
 > This is a template for your startup application. You must modify this `README.md` file for each phase of your development. You only need to fill in the section for each deliverable when that deliverable is submitted in Canvas. Without completing the section for a deliverable, the TA will not know what to look for when grading your submission. Feel free to add additional information to each deliverable description, but make sure you at least have the list of rubric items and a description of what you did for each item.
@@ -69,16 +69,16 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [ ] **HTML pages** - I did not complete this part of the deliverable.
-- [ ] **Proper HTML element usage** - I did not complete this part of the deliverable.
-- [ ] **Links** - I did not complete this part of the deliverable.
-- [ ] **Text** - I did not complete this part of the deliverable.
-- [ ] **3rd party API placeholder** - I did not complete this part of the deliverable.
-- [ ] **Images** - I did not complete this part of the deliverable.
-- [ ] **Login placeholder** - I did not complete this part of the deliverable.
-- [ ] **DB data placeholder** - I did not complete this part of the deliverable.
-- [ ] **WebSocket placeholder** - I did not complete this part of the deliverable.
+- [X] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits) - I deplyed simon, added my github link in the footer, and periodically comitted throughout my work.
+- [X] **HTML pages** - I added 3 html pages
+- [X] **Proper HTML element usage** - I included BODY, NAV, MAIN, HEADER, and FOOTER in my implimentation
+- [X] **Links** - I included links between html pages within my implimentation
+- [X] **Text** - I included accurate textual content.
+- [X] **3rd party API placeholder** - I added images and information retreivable from the API
+- [X] **Images** - I added images from the API as well as an arrow graphic
+- [X] **Login placeholder** - There is a login page that send you to the play page.
+- [X] **DB data placeholder** - The API content will be stored in the database upon retreival and there are stats for scores that will be from the database as well.
+- [X] **WebSocket placeholder** - The leaderboard will update in real time using websocket and all live players will have their scores displayed in real time as well.
 
 ## 🚀 CSS deliverable
 
