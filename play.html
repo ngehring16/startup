@@ -1,186 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <!-- Tell browsers not to scale the viewport automatically -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MovieMaze HTML</title>
-    <link rel="icon" href="favicon.ico" />
 
-    <link rel="stylesheet" href="main.css" />
-    <link rel="stylesheet" href="play.css" />
+<head>
+  <meta charset="UTF-8" />
+  <!-- Tell browsers not to scale the viewport automatically -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MovieMaze HTML</title>
+  <link rel="icon" href="favicon.ico" />
 
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
-      crossorigin="anonymous"
-    />
-  </head>
- <body class="bg-dark text-light">
-    <header class="container-fluid">
-      <nav class="navbar fixed-top navbar-dark">
-        <a class="navbar-brand" href="#">MovieMaze<sup>&reg;</sup></a>
-        <menu class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" href="index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="play.html">Play</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="scores.html">Leaderboard</a>
-          </li>
-        </menu>
-      </nav>
-    </header>
+  <link rel="stylesheet" href="main.css" />
+  <link rel="stylesheet" href="play.css" />
 
-    <main class="bg-secondary">
-      <div class="players">
-        Player:
-        <span class="player-name">Movie guy</span>
-      </div>
-      <div>
-        <label for="count">Score</label>
-        <input type="text" id="count" value="--" readonly />
-      </div>
-      <div>
-        <label for="count">HighScore</label>
-        <input type="text" id="count" value="900" readonly />
-      </div>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous" />
+</head>
 
-      <br />
+<body class="bg-dark text-light">
+  <header class="container-fluid">
+    <nav class="navbar fixed-top navbar-dark bg-dark">
+      <a class="navbar-brand" href="#">MovieMaze<sup>&reg;</sup></a>
+      <menu class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" href="index.html">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="play.html">Play</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="scores.html">Leaderboard</a>
+        </li>
+      </menu>
+    </nav>
+  </header>
 
-      <br />
+  <main class="bg-secondary">
+    <div class="players">
+      Player:
+      <span class="player-name">Movie guy</span>
+    </div>
+    <div>
+      <label for="count">Score</label>
+      <input type="text" id="count" value="--" readonly />
+    </div>
+    <div>
+      <label for="count">HighScore</label>
+      <input type="text" id="count" value="900" readonly />
+    </div>
 
-      <div class="movies">
-        <div class="start-poster">
-            <img width= "150" height="231" alt="Poster1" src="https://m.media-amazon.com/images/M/MV5BZDU5MDNiMGItYjVmZi00NDUxLTg2OTktNGE0NzNlNzM4NzgyXkEyXkFqcGc@._V1_SX300.jpg" /> 
-        </div>
-       <img class="arrow" alt="arrow1" width= "150" height="231" src="arrow.svg" />
-       <img class="end-poster" width="150" height="231" alt="Poster 2" src="https://m.media-amazon.com/images/M/MV5BMjE4NTA1NzExN15BMl5BanBnXkFtZTYwNjc3MjM3._V1_QL75_UY562_CR0,0,380,562_.jpg" />
-      </div>
-      <div class="movie-info">
-        
-      </div>
-      <div class="movie-info">
-        <div class="movie-title">
+    <br />
 
+    <br />
+
+    <div class="movies">
+      <div class="start-poster">
+        <img class="start" alt="Poster1"
+          src="https://m.media-amazon.com/images/M/MV5BZDU5MDNiMGItYjVmZi00NDUxLTg2OTktNGE0NzNlNzM4NzgyXkEyXkFqcGc@._V1_SX300.jpg" />
+        <div class="movie-info">
+          <div class="movie-title">
+            <p> Kung Fu Panda </p>
+          </div>
+          <div class="movie-stats">
+            <p>2008</p>
+            <p>Jack Black, Ian McShane, Angelina Jolie</p>
+            <p>Mark Osborne, John Stevenson</p>
+          </div>
         </div>
       </div>
-      <p> Kung Fu Panda (Year: [2008], Actors: [Jack Black, Ian McShane, Angelina Jolie], Director: [Mark Osborne, John Stevenson]) 
-          "this information is taken from the omdbapi" </p>
-      <p> How to Lose a Guy in 10 Days (Year: [2003], Actors: [Kate Hudson, Matthew McConaughey, Adam Goldberg], Director: [Donald Petrie]) </p>
-      
-      <br />
-      
-      <div>
-        <form action="play.html" method="get">
-          <label for="Movie1">Movie one: </label>
-          <textarea id="ta" name="ta-id">a minecraft movie
-          </textarea>
-          <button type="submit">Submit</button>
-        </form>
-        <p> A Minecraft Movie(Year: [2025], Actors: [Jason Momoa, Jack Black, Sebastian Hansen], Director: [Jared Hess]) 
-          "this information is taken from the omdbapi" </p>
+      <img class="arrow" alt="arrow1" src="arrow.svg" />
+      <div class="end-poster">
+        <img class="end" alt="Poster 2"
+          src="https://m.media-amazon.com/images/M/MV5BMjE4NTA1NzExN15BMl5BanBnXkFtZTYwNjc3MjM3._V1_QL75_UY562_CR0,0,380,562_.jpg" />
+        <div class="movie-info">
+          <div class="movie-title">
+            <p> How to Lose a Guy in 10 Days </p>
+          </div>
+          <div class="movie-stats">
+            <p>2003</p>
+            <p>Kate Hudson, Matthew McConaughey, Adam Goldberg</p>
+            <p>Donald Petrie</p>
+          </div>
+        </div>
       </div>
-      <div>
-        <form action="play.html" method="get">
-          <label for="Movie2">Movie two: </label>
-          <textarea id="ta" name="ta-id"> Song Sung Blue
+    </div>
+    <div>
+      <form action="play.html" method="get">
+        <label for="Movie1">Movie one: </label>
+        <textarea id="ta" name="ta-id">a minecraft movie
           </textarea>
-          <button type="submit">Submit</button>
-        </form>
-        <p> Song Sung Blue(Year: [2025], Actors: [Hugh Jackman, Kate Hudson, Ella Anderson], Director: [Craig Brewer]) 
-          "each movie pulled from the api is added to the database. Before checking the api it will check the database to conserve api calls to a minimum."
-      </div>
-      
-      <br />
-      <br />
+        <button type="submit">Submit</button>
+      </form>
+      <p> A Minecraft Movie(Year: [2025], Actors: [Jason Momoa, Jack Black, Sebastian Hansen], Director: [Jared Hess])
+        "this information is taken from the omdbapi" </p>
+    </div>
+    <div>
+      <form action="play.html" method="get">
+        <label for="Movie2">Movie two: </label>
+        <textarea id="ta" name="ta-id"> Song Sung Blue
+          </textarea>
+        <button type="submit">Submit</button>
+      </form>
+      <p> Song Sung Blue(Year: [2025], Actors: [Hugh Jackman, Kate Hudson, Ella Anderson], Director: [Craig Brewer])
+        "each movie pulled from the api is added to the database. Before checking the api it will check the database to
+        conserve api calls to a minimum."
+    </div>
 
-      <p> Congrats! You solved the MovieMaze in TWO guesses!</p>
-       <img width= "50" height="77" alt="Poster1" src="https://m.media-amazon.com/images/M/MV5BZDU5MDNiMGItYjVmZi00NDUxLTg2OTktNGE0NzNlNzM4NzgyXkEyXkFqcGc@._V1_SX300.jpg" /> 
-       <img width= "100" height="50" alt="arrow" src="https://static.vecteezy.com/system/resources/thumbnails/010/451/470/small/arrow-icon-in-trendy-flat-style-isolated-on-white-background-arrow-symbol-for-your-web-site-design-logo-app-ui-illustration-free-vector.jpg" />
-       <img width="50" height="77" alt="guess1" src="https://m.media-amazon.com/images/M/MV5BYzFjMzNjOTktNDBlNy00YWZhLWExYTctZDcxNDA4OWVhOTJjXkEyXkFqcGc@._V1_SX300.jpg" />
-       <img width= "100" height="50" alt="arrow" src="https://static.vecteezy.com/system/resources/thumbnails/010/451/470/small/arrow-icon-in-trendy-flat-style-isolated-on-white-background-arrow-symbol-for-your-web-site-design-logo-app-ui-illustration-free-vector.jpg" />
-       <img width="50" height="77" alt="guess2" src="https://m.media-amazon.com/images/M/MV5BYmQ2YjhjNjgtNGQxNC00NmI0LWEzMjktNWEzMWY2OTUwZjFiXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg" />
-       <img width= "100" height="50" alt="arrow" src="https://static.vecteezy.com/system/resources/thumbnails/010/451/470/small/arrow-icon-in-trendy-flat-style-isolated-on-white-background-arrow-symbol-for-your-web-site-design-logo-app-ui-illustration-free-vector.jpg" />
-       <img width="50" height="77" alt="Poster 2" src="https://m.media-amazon.com/images/M/MV5BMjE4NTA1NzExN15BMl5BanBnXkFtZTYwNjc3MjM3._V1_QL75_UY562_CR0,0,380,562_.jpg" />
+    <br />
+    <br />
 
-      <br />
-      <br />
+    <p> Congrats! You solved the MovieMaze in TWO guesses!</p>
+    <img width="50" height="77" alt="Poster1"
+      src="https://m.media-amazon.com/images/M/MV5BZDU5MDNiMGItYjVmZi00NDUxLTg2OTktNGE0NzNlNzM4NzgyXkEyXkFqcGc@._V1_SX300.jpg" />
+    <img width="100" height="50" alt="arrow"
+      src="https://static.vecteezy.com/system/resources/thumbnails/010/451/470/small/arrow-icon-in-trendy-flat-style-isolated-on-white-background-arrow-symbol-for-your-web-site-design-logo-app-ui-illustration-free-vector.jpg" />
+    <img width="50" height="77" alt="guess1"
+      src="https://m.media-amazon.com/images/M/MV5BYzFjMzNjOTktNDBlNy00YWZhLWExYTctZDcxNDA4OWVhOTJjXkEyXkFqcGc@._V1_SX300.jpg" />
+    <img width="100" height="50" alt="arrow"
+      src="https://static.vecteezy.com/system/resources/thumbnails/010/451/470/small/arrow-icon-in-trendy-flat-style-isolated-on-white-background-arrow-symbol-for-your-web-site-design-logo-app-ui-illustration-free-vector.jpg" />
+    <img width="50" height="77" alt="guess2"
+      src="https://m.media-amazon.com/images/M/MV5BYmQ2YjhjNjgtNGQxNC00NmI0LWEzMjktNWEzMWY2OTUwZjFiXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg" />
+    <img width="100" height="50" alt="arrow"
+      src="https://static.vecteezy.com/system/resources/thumbnails/010/451/470/small/arrow-icon-in-trendy-flat-style-isolated-on-white-background-arrow-symbol-for-your-web-site-design-logo-app-ui-illustration-free-vector.jpg" />
+    <img width="50" height="77" alt="Poster 2"
+      src="https://m.media-amazon.com/images/M/MV5BMjE4NTA1NzExN15BMl5BanBnXkFtZTYwNjc3MjM3._V1_QL75_UY562_CR0,0,380,562_.jpg" />
 
-       <div>
-        <form action="play.html" method="get">
-          <label for="Movie3">Movie three: </label>
-          <textarea id="ta" name="ta-id">
-          </textarea>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-      <div>
-        <form action="play.html" method="get">
-          <label for="Movie4">Movie four: </label>
-          <textarea id="ta" name="ta-id">
-          </textarea>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-      <div>
-        <form action="play.html" method="get">
-          <label for="Movie5">Movie five: </label>
-          <textarea id="ta" name="ta-id">
-          </textarea>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-      <div>
-        <form action="play.html" method="get">
-          <label for="Movie6">Movie six: </label>
-          <textarea id="ta" name="ta-id">
-          </textarea>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-      <div>
-        <form action="play.html" method="get">
-          <label for="Movie7">Movie seven: </label>
-          <textarea id="ta" name="ta-id">
-          </textarea>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-      <div>
-        <form action="play.html" method="get">
-          <label for="Movie8">Movie eight: </label>
-          <textarea id="ta" name="ta-id">
-          </textarea>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-      <div>
-        <form action="play.html" method="get">
-          <label for="Movie9">Movie nine: </label>
-          <textarea id="ta" name="ta-id">
-          </textarea>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-      <div>
-        <form action="play.html" method="get">
-          <label for="Movie10">Movie ten: </label>
-          <textarea id="ta" name="ta-id">
-          </textarea>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-    </main>
+    <br />
+    <br />
 
-    <footer class="bg-dark text-white-50">
-      <div class="container-fluid">
-        <span class="text-reset">Nathan Gehring</span>
-        <a class ="text-reset" href="https://github.com/ngehring16/startup">GitHub</a>
-      </div>
-    </footer>
-  </body>
+    <div>
+      <form action="play.html" method="get">
+        <label for="Movie3">Movie three: </label>
+        <textarea id="ta" name="ta-id">
+          </textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <div>
+      <form action="play.html" method="get">
+        <label for="Movie4">Movie four: </label>
+        <textarea id="ta" name="ta-id">
+          </textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <div>
+      <form action="play.html" method="get">
+        <label for="Movie5">Movie five: </label>
+        <textarea id="ta" name="ta-id">
+          </textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <div>
+      <form action="play.html" method="get">
+        <label for="Movie6">Movie six: </label>
+        <textarea id="ta" name="ta-id">
+          </textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <div>
+      <form action="play.html" method="get">
+        <label for="Movie7">Movie seven: </label>
+        <textarea id="ta" name="ta-id">
+          </textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <div>
+      <form action="play.html" method="get">
+        <label for="Movie8">Movie eight: </label>
+        <textarea id="ta" name="ta-id">
+          </textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <div>
+      <form action="play.html" method="get">
+        <label for="Movie9">Movie nine: </label>
+        <textarea id="ta" name="ta-id">
+          </textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+    <div>
+      <form action="play.html" method="get">
+        <label for="Movie10">Movie ten: </label>
+        <textarea id="ta" name="ta-id">
+          </textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  </main>
+
+  <footer class="bg-dark text-white-50">
+    <div class="container-fluid">
+      <span class="text-reset">Nathan Gehring</span>
+      <a class="text-reset" href="https://github.com/ngehring16/startup">GitHub</a>
+    </div>
+  </footer>
+</body>
+
 </html>

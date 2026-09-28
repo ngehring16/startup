@@ -6,19 +6,73 @@ menu {
   list-style: none;
 }
 
+body {
+  display: flex;
+  flex-direction: column;
+  min-width: 375px;
+}
+
 .movies {
+    height: 100%;
     align-items: center;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, auto minmax(300px, 1fr));
-    grid-auto-rows: 300px;
+    display: flex;
+    grid-template-columns: repeat(auto-fill, auto minmax(150px, 1fr));
+    background-color: cadetblue;
     grid-gap: 1em;
     grid-auto-flow: column;
     place-items: center;
+    max-height: 231px;
+    align-self:center;
+}
+.movie-info {
+    align-items: center;
+    display: flex;
+    grid-template-columns: repeat(auto-fill, auto minmax(150px, 1fr));
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    grid-gap: 1em;
+    grid-auto-flow: column;
+    place-items: center;
+    width: 100%;
+    height: 100%;
+}
+.movie-title{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
-.movies .start-poster{
+.start-poster{
     border: 10px solid black;
+    align-items: center;
+    display: flex;
+    grid-template-columns: repeat(auto-fill, auto minmax(150px, 1fr));
+    grid-gap: 1em;
+    grid-auto-flow: column;
+    place-items: center; 
+    
 }
-.movies .end-poster{
+
+.end-poster{
     border: 10px solid black;
+    align-items: center;
+    display: flex;
+    grid-template-columns: repeat(auto-fill, auto minmax(150px, 1fr));
+    grid-gap: 1em;
+    grid-auto-flow: column;
+    place-items: center; 
+}
+
+.movies .start{
+    max-width: 150px;
+    width: 100%;
+    height: 100%;
+}
+.movies .end{
+    max-width: 150px;
+    width: 100%;
+    height: 100%;
+}
+
+.movies .arrow{
+    max-width: 150px;
+    width: 100%;
+    height: 100%;
 }
