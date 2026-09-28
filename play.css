@@ -1,0 +1,24 @@
+menu {
+  flex: 1;
+  display: flex;
+  /*  overwrite Bootstrap so the menu does not wrap */
+  flex-direction: row !important;
+  list-style: none;
+}
+
+.movies {
+    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, auto minmax(300px, 1fr));
+    grid-auto-rows: 300px;
+    grid-gap: 1em;
+    grid-auto-flow: column;
+    place-items: center;
+}
+
+.movies .start-poster{
+    border: 10px solid black;
+}
+.movies .end-poster{
+    border: 10px solid black;
+}
