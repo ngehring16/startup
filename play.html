@@ -33,8 +33,8 @@
     </nav>
   </header>
 
-  <main class="bg-secondary">
-    <div class="players">
+  <main class="bg-secondary" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+    <div class="players" style="font-weight: bold;">
       Player:
       <span class="player-name">Movie guy</span>
     </div>
@@ -48,7 +48,6 @@
     </div>
 
     <br />
-
     <br />
 
     <div class="movies">
@@ -82,116 +81,156 @@
         </div>
       </div>
     </div>
-    <div>
-      <form action="play.html" method="get">
-        <label for="Movie1">Movie one: </label>
-        <textarea id="ta" name="ta-id">a minecraft movie
-          </textarea>
-        <button type="submit">Submit</button>
-      </form>
-      <p> A Minecraft Movie(Year: [2025], Actors: [Jason Momoa, Jack Black, Sebastian Hansen], Director: [Jared Hess])
-        "this information is taken from the omdbapi" </p>
-    </div>
-    <div>
-      <form action="play.html" method="get">
-        <label for="Movie2">Movie two: </label>
-        <textarea id="ta" name="ta-id"> Song Sung Blue
-          </textarea>
-        <button type="submit">Submit</button>
-      </form>
-      <p> Song Sung Blue(Year: [2025], Actors: [Hugh Jackman, Kate Hudson, Ella Anderson], Director: [Craig Brewer])
-        "each movie pulled from the api is added to the database. Before checking the api it will check the database to
-        conserve api calls to a minimum."
-    </div>
 
     <br />
     <br />
 
-    <p> Congrats! You solved the MovieMaze in TWO guesses!</p>
-    <img width="50" height="77" alt="Poster1"
-      src="https://m.media-amazon.com/images/M/MV5BZDU5MDNiMGItYjVmZi00NDUxLTg2OTktNGE0NzNlNzM4NzgyXkEyXkFqcGc@._V1_SX300.jpg" />
-    <img width="100" height="50" alt="arrow"
-      src="https://static.vecteezy.com/system/resources/thumbnails/010/451/470/small/arrow-icon-in-trendy-flat-style-isolated-on-white-background-arrow-symbol-for-your-web-site-design-logo-app-ui-illustration-free-vector.jpg" />
-    <img width="50" height="77" alt="guess1"
-      src="https://m.media-amazon.com/images/M/MV5BYzFjMzNjOTktNDBlNy00YWZhLWExYTctZDcxNDA4OWVhOTJjXkEyXkFqcGc@._V1_SX300.jpg" />
-    <img width="100" height="50" alt="arrow"
-      src="https://static.vecteezy.com/system/resources/thumbnails/010/451/470/small/arrow-icon-in-trendy-flat-style-isolated-on-white-background-arrow-symbol-for-your-web-site-design-logo-app-ui-illustration-free-vector.jpg" />
-    <img width="50" height="77" alt="guess2"
-      src="https://m.media-amazon.com/images/M/MV5BYmQ2YjhjNjgtNGQxNC00NmI0LWEzMjktNWEzMWY2OTUwZjFiXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg" />
-    <img width="100" height="50" alt="arrow"
-      src="https://static.vecteezy.com/system/resources/thumbnails/010/451/470/small/arrow-icon-in-trendy-flat-style-isolated-on-white-background-arrow-symbol-for-your-web-site-design-logo-app-ui-illustration-free-vector.jpg" />
-    <img width="50" height="77" alt="Poster 2"
-      src="https://m.media-amazon.com/images/M/MV5BMjE4NTA1NzExN15BMl5BanBnXkFtZTYwNjc3MjM3._V1_QL75_UY562_CR0,0,380,562_.jpg" />
-
-    <br />
-    <br />
-
-    <div>
-      <form action="play.html" method="get">
-        <label for="Movie3">Movie three: </label>
-        <textarea id="ta" name="ta-id">
-          </textarea>
-        <button type="submit">Submit</button>
-      </form>
+    <div class="guesses">
+      <div class="selectors">
+        <div>
+          <form action="play.html" method="get">
+            <div class="form-group">
+              <label for="guess1">Guess ONE:</label>
+              <input type="text" class="form-control" id="guess1" placeholder="a minecraft movie">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+        <div>
+          <form action="play.html" method="get">
+            <div class="form-group">
+              <label for="guess2">Guess TWO:</label>
+              <input type="text" class="form-control" id="guess2" placeholder="song sung blue">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+        <div>
+          <form action="play.html" method="get">
+            <div class="form-group">
+              <label for="guess3">Guess THREE:</label>
+              <input type="text" class="form-control" id="guess3" placeholder="movie #3">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+        <div>
+          <form action="play.html" method="get">
+            <div class="form-group">
+              <label for="guess4">Guess FOUR:</label>
+              <input type="text" class="form-control" id="guess4" placeholder="movie #4">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>  
+          </form>
+        </div>
+        <div>
+          <form action="play.html" method="get">
+            <div class="form-group">
+              <label for="guess5">Guess FIVE:</label>
+              <input type="text" class="form-control" id="guess5" placeholder="movie #5">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+        <div>
+          <form action="play.html" method="get">
+            <div class="form-group">
+              <label for="guess6">Guess SIX:</label>
+              <input type="text" class="form-control" id="guess6" placeholder="movie #6">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+        <div>
+          <form action="play.html" method="get">
+            <div class="form-group">
+              <label for="guess7">Guess SEVEN:</label>
+              <input type="text" class="form-control" id="guess7" placeholder="movie #7">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+        <div>
+          <form action="play.html" method="get">
+            <div class="form-group">
+              <label for="guess8">Guess EIGHT:</label>
+              <input type="text" class="form-control" id="guess8" placeholder="movie #8">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+        <div>
+          <form action="play.html" method="get">
+            <div class="form-group">
+              <label for="guess9">Guess NINE:</label>
+              <input type="text" class="form-control" id="guess9" placeholder="movie #9">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+        <div>
+          <form action="play.html" method="get">
+            <div class="form-group">
+              <label for="guess10">Guess TEN:</label>
+              <input type="text" class="form-control" id="guess10" placeholder="movie #10">
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="information-2">
+        <div class="movie-info">
+          <div class="movie-title">
+                <p> A Minecraft Movie </p>
+              </div>
+              <div class="movie-stats">
+                <p>2025</p>
+                <p>Jason Momoa, Jack Black, Sebastian Hansen</p>
+                <p>Jared Hess</p>
+              </div>
+        </div>
+        <div class="movie-info">
+          <div class="movie-title">
+                <p> Song Sung Blue </p>
+              </div>
+              <div class="movie-stats">
+                <p>2025</p>
+                <p>Hugh Jackman, Kate Hudson, Ella Anderson</p>
+                <p>Craig Brewer</p>
+              </div>
+        </div>
+      </div>
     </div>
-    <div>
-      <form action="play.html" method="get">
-        <label for="Movie4">Movie four: </label>
-        <textarea id="ta" name="ta-id">
-          </textarea>
-        <button type="submit">Submit</button>
-      </form>
+    <div class="solved-message">
+      <div class="congrats" style="font-weight: bold; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">
+        CONGRATS:
+        <span class="message" style="font-weight: normal">You solved the MovieMaze in TWO guesses!</span>
+      </div>
     </div>
-    <div>
-      <form action="play.html" method="get">
-        <label for="Movie5">Movie five: </label>
-        <textarea id="ta" name="ta-id">
-          </textarea>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-    <div>
-      <form action="play.html" method="get">
-        <label for="Movie6">Movie six: </label>
-        <textarea id="ta" name="ta-id">
-          </textarea>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-    <div>
-      <form action="play.html" method="get">
-        <label for="Movie7">Movie seven: </label>
-        <textarea id="ta" name="ta-id">
-          </textarea>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-    <div>
-      <form action="play.html" method="get">
-        <label for="Movie8">Movie eight: </label>
-        <textarea id="ta" name="ta-id">
-          </textarea>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-    <div>
-      <form action="play.html" method="get">
-        <label for="Movie9">Movie nine: </label>
-        <textarea id="ta" name="ta-id">
-          </textarea>
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-    <div>
-      <form action="play.html" method="get">
-        <label for="Movie10">Movie ten: </label>
-        <textarea id="ta" name="ta-id">
-          </textarea>
-        <button type="submit">Submit</button>
-      </form>
+    <div class="final-path">
+      <div class="started-poster">
+          <img class="started" alt="Poster1"
+            src="https://m.media-amazon.com/images/M/MV5BZDU5MDNiMGItYjVmZi00NDUxLTg2OTktNGE0NzNlNzM4NzgyXkEyXkFqcGc@._V1_SX300.jpg" />
+      </div>
+      <img class="arrow" alt="arrow1" src="arrow.svg" />
+      <div class="guess1-poster">
+          <img class="1" alt="guess-poster1"
+            src="https://m.media-amazon.com/images/M/MV5BYzFjMzNjOTktNDBlNy00YWZhLWExYTctZDcxNDA4OWVhOTJjXkEyXkFqcGc@._V1_SX300.jpg" />
+      </div>
+      <img class="arrow" alt="arrow1" src="arrow.svg" />
+      <div class="guess2-poster">
+          <img class="2" alt="guess-poster2"
+            src="https://m.media-amazon.com/images/M/MV5BYmQ2YjhjNjgtNGQxNC00NmI0LWEzMjktNWEzMWY2OTUwZjFiXkEyXkFqcGc@._V1_QL75_UX380_CR0,0,380,562_.jpg" />
+      </div>
+      <img class="arrow" alt="arrow1" src="arrow.svg" />
+      <div class="ended-poster">
+        <img class="ended" alt="Poster 2"
+          src="https://m.media-amazon.com/images/M/MV5BMjE4NTA1NzExN15BMl5BanBnXkFtZTYwNjc3MjM3._V1_QL75_UY562_CR0,0,380,562_.jpg" />
+      </div>
     </div>
   </main>
 
+    
   <footer class="bg-dark text-white-50">
     <div class="container-fluid">
       <span class="text-reset">Nathan Gehring</span>

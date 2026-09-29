@@ -13,41 +13,48 @@ body {
 }
 
 .movies {
-    height: 100%;
-    align-items: center;
     display: flex;
-    grid-template-columns: repeat(auto-fill, auto minmax(150px, 1fr));
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    flex-wrap: wrap;
     background-color: cadetblue;
-    grid-gap: 1em;
-    grid-auto-flow: column;
-    place-items: center;
-    max-height: 231px;
-    align-self:center;
-}
-.movie-info {
-    align-items: center;
-    display: flex;
-    grid-template-columns: repeat(auto-fill, auto minmax(150px, 1fr));
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    grid-gap: 1em;
-    grid-auto-flow: column;
-    place-items: center;
-    width: 100%;
-    height: 100%;
-}
-.movie-title{
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    padding: 1em;
 }
 
-.start-poster{
-    border: 10px solid black;
-    align-items: center;
-    display: flex;
-    grid-template-columns: repeat(auto-fill, auto minmax(150px, 1fr));
-    grid-gap: 1em;
-    grid-auto-flow: column;
-    place-items: center; 
-    
+.start-poster,
+.end-poster {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 10px solid black;
+  width: clamp(120px, 30vw, 200px);
+}
+
+.movies .start,
+.movies .end {
+  width: 100%;
+  height: auto;                 
+  aspect-ratio: 2 / 3;          
+  object-fit: cover;            
+  display: block;
+}
+
+.movies .arrow {
+  width: clamp(40px, 8vw, 100px);
+  height: auto;
+  flex: 0 0 auto;
+}
+
+.movie-info {
+  width: 100%;
+  text-align: center;
+  align-content: start;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.movie-title{
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 .end-poster{
@@ -60,19 +67,52 @@ body {
     place-items: center; 
 }
 
-.movies .start{
-    max-width: 150px;
-    width: 100%;
-    height: 100%;
-}
-.movies .end{
-    max-width: 150px;
-    width: 100%;
-    height: 100%;
+.guesses .selectors{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    flex-wrap: wrap;
+    background-color: cadetblue;
+    padding: 1em;
 }
 
-.movies .arrow{
-    max-width: 150px;
-    width: 100%;
-    height: 100%;
+.guesses{
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    justify-content: center;
+    gap: 1em;
+    padding: 1em;
+    background-color: cadetblue;
+}
+
+.final-path{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    background-color: cadetblue;
+    gap: 1em;
+    padding: 1em;
+}
+.final-path .started-poster,
+.final-path .guess1-poster,
+.final-path .guess2-poster,
+.final-path .ended-poster {
+  flex: 0 1 180px;              
+  min-width: 0;                 
+}
+
+.final-path img:not(.arrow) {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.final-path .arrow {
+  flex: 0 1 clamp(40px, 8vw, 100px);
+  min-width: 0;
+  height: auto;
 }
