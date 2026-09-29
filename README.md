@@ -88,9 +88,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 - [X] **Visually appealing colors and layout. No overflowing elements.** - I organized all of my elements in soft blue boxes that contrast well with the white and dark gray backgrounds.
 - [X] **Use of a CSS framework** - I made use of boostrap grid and flex formatting as well as buttons and forms.
 - [X] **All visual elements styled using CSS** - I created CSS files for each html page and made reference to them throughout
-- [ ] **Responsive to window resizing using flexbox and/or grid display** - I did not complete this part of the deliverable.
-- [ ] **Use of a imported font** - I did not complete this part of the deliverable.
-- [ ] **Use of different types of selectors including element, class, ID, and pseudo selectors** - I did not complete this part of the deliverable.
+- [X] **Responsive to window resizing using flexbox and/or grid display** - all pages have scalable elements through boostrap grid and flex as well as images that grow and shrink with the page.
+- [X] **Use of a imported font** - I imported the Metal Mania font from google for the logo on the header.
+- [X] **Use of different types of selectors including element, class, ID, and pseudo selectors** - I used a few depending on what was needed in my css files
 
 ## 🚀 React part 1: Routing deliverable
 
