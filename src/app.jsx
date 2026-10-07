@@ -1,6 +1,10 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
+import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import { Login } from './login/login';
+import { Play } from './play/play';
+import { Scores } from './scores/scores';
 
 export default function App() {
   return (
@@ -10,13 +14,13 @@ export default function App() {
         <a class="navbar-brand" href="#">MovieMaze<sup>&reg;</sup></a>
         <menu class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" href="index.html">Home</a>
+            <a class="nav-link active" href="index">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="play.html">Play</a>
+            <a class="nav-link" href="play">Play</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="scores.html">Leaderboard</a>
+            <a class="nav-link" href="scores">Leaderboard</a>
           </li>
         </menu>
       </nav>
