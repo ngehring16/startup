@@ -116,3 +116,19 @@ body {
   min-width: 0;
   height: auto;
 }
+
+.scoresheet {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.players {
+  font-weight: bold;
+}
+
+.congrats{
+  font-weight: bold; font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.message{
+  font-weight: normal;
+}

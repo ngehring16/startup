@@ -9,7 +9,7 @@ import { Scores } from './scores/scores';
 export default function App() {
   return (
     <BrowserRouter>
-        <div className="bg-dark text-light">
+        <div className="body bg-dark text-light">
             <header className="container-fluid">
             <nav className="navbar fixed-top navbar-dark">
                 <NavLink className="navbar-brand" to="/">MovieMaze<sup>&reg;</sup></NavLink>
