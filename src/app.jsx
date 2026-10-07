@@ -9,26 +9,26 @@ import { Scores } from './scores/scores';
 export default function App() {
   return (
     <BrowserRouter>
-        <body className="bg-dark text-light">
+        <div className="bg-dark text-light">
             <header className="container-fluid">
             <nav className="navbar fixed-top navbar-dark">
-                <NavLink className="navbar-brand" to="#">MovieMaze<sup>&reg;</sup></NavLink>
+                <NavLink className="navbar-brand" to="/">MovieMaze<sup>&reg;</sup></NavLink>
                 <menu className="navbar-nav">
                 <li className="nav-item">
-                    <NavLink className="nav-link active" to="">Home</NavLink>
+                    <NavLink className="nav-link" to="/">Home</NavLink>
                 </li>
                 <li className="nav-item">
-                    <NavLink className="nav-link" to="play">Play</NavLink>
+                    <NavLink className="nav-link" to="/play">Play</NavLink>
                 </li>
                 <li className="nav-item">
-                    <NavLink className="nav-link" to="scores">Leaderboard</NavLink>
+                    <NavLink className="nav-link" to="/scores">Leaderboard</NavLink>
                 </li>
                 </menu>
             </nav>
             </header>
 
             <Routes>
-                <Route path='/' element={<Login />} exact />
+                <Route path='/' element={<Login />} />
                 <Route path='/play' element={<Play />} />
                 <Route path='/scores' element={<Scores />} />
                 <Route path='*' element={<NotFound />} />
@@ -40,7 +40,7 @@ export default function App() {
                 <NavLink className="text-reset" to="https://github.com/ngehring16/startup">GitHub</NavLink>
             </div>
             </footer>
-        </body>
+        </div>
     </BrowserRouter>
   );
 }

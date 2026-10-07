@@ -19,7 +19,7 @@ main {
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-main .h1 {
+main h1 {
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-weight: bold;
 }
