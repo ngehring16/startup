@@ -15,7 +15,7 @@ export default function App() {
                 <NavLink className="navbar-brand" to="#">MovieMaze<sup>&reg;</sup></NavLink>
                 <menu className="navbar-nav">
                 <li className="nav-item">
-                    <NavLink className="nav-link active" to="index">Home</NavLink>
+                    <NavLink className="nav-link active" to="">Home</NavLink>
                 </li>
                 <li className="nav-item">
                     <NavLink className="nav-link" to="play">Play</NavLink>
