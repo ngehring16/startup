@@ -8,32 +8,43 @@ import { Scores } from './scores/scores';
 
 export default function App() {
   return (
-  <body className="bg-dark text-light">
-    <header className="container-fluid">
-      <nav className="navbar fixed-top navbar-dark">
-        <a className="navbar-brand" href="#">MovieMaze<sup>&reg;</sup></a>
-        <menu className="navbar-nav">
-          <li className="nav-item">
-            <a className="nav-link active" href="index">Home</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="play">Play</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="scores">Leaderboard</a>
-          </li>
-        </menu>
-      </nav>
-    </header>
+    <BrowserRouter>
+        <body className="bg-dark text-light">
+            <header className="container-fluid">
+            <nav className="navbar fixed-top navbar-dark">
+                <NavLink className="navbar-brand" to="#">MovieMaze<sup>&reg;</sup></NavLink>
+                <menu className="navbar-nav">
+                <li className="nav-item">
+                    <NavLink className="nav-link active" to="index">Home</NavLink>
+                </li>
+                <li className="nav-item">
+                    <NavLink className="nav-link" to="play">Play</NavLink>
+                </li>
+                <li className="nav-item">
+                    <NavLink className="nav-link" to="scores">Leaderboard</NavLink>
+                </li>
+                </menu>
+            </nav>
+            </header>
 
-    <main>App components go here</main>
+            <Routes>
+                <Route path='/' element={<Login />} exact />
+                <Route path='/play' element={<Play />} />
+                <Route path='/scores' element={<Scores />} />
+                <Route path='*' element={<NotFound />} />
+            </Routes>
 
-    <footer className="bg-dark text-white-50">
-      <div className="container-fluid">
-        <span className="text-reset">Nathan Gehring</span>
-        <a className="text-reset" href="https://github.com/ngehring16/startup">GitHub</a>
-      </div>
-    </footer>
-  </body>
+            <footer className="bg-dark text-white-50">
+            <div className="container-fluid">
+                <span className="text-reset">Nathan Gehring</span>
+                <NavLink className="text-reset" to="https://github.com/ngehring16/startup">GitHub</NavLink>
+            </div>
+            </footer>
+        </body>
+    </BrowserRouter>
   );
+}
+
+function NotFound() {
+  return <main className="container-fluid bg-secondary text-center">404: Return to sender. Address unknown.</main>;
 }
