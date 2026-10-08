@@ -58,7 +58,7 @@ export function Play() {
         <div className="guesses">
         <div className="selectors">
             <div>
-            <form action="play.html" method="get">
+            <form action="/play" method="get">
                 <div className="form-group">
                 <label for="guess1">Guess ONE:</label>
                 <input type="text" className="form-control" id="guess1" placeholder="a minecraft movie"/>
@@ -68,7 +68,7 @@ export function Play() {
             </form>
             </div>
             <div>
-            <form action="play.html" method="get">
+            <form action="/play" method="get">
                 <div className="form-group">
                 <label for="guess2">Guess TWO:</label>
                 <input type="text" className="form-control" id="guess2" placeholder="song sung blue"/>
@@ -77,7 +77,7 @@ export function Play() {
             </form>
             </div>
             <div>
-            <form action="play.html" method="get">
+            <form action="/play" method="get">
                 <div className="form-group">
                 <label for="guess3">Guess THREE:</label>
                 <input type="text" className="form-control" id="guess3" placeholder="movie #3"/>
@@ -86,7 +86,7 @@ export function Play() {
             </form>
             </div>
             <div>
-            <form action="play.html" method="get">
+            <form action="/play" method="get">
                 <div className="form-group">
                 <label for="guess4">Guess FOUR:</label>
                 <input type="text" className="form-control" id="guess4" placeholder="movie #4"/>
@@ -95,7 +95,7 @@ export function Play() {
             </form>
             </div>
             <div>
-            <form action="play.html" method="get">
+            <form action="/play" method="get">
                 <div className="form-group">
                 <label for="guess5">Guess FIVE:</label>
                 <input type="text" className="form-control" id="guess5" placeholder="movie #5"/>
@@ -104,7 +104,7 @@ export function Play() {
             </form>
             </div>
             <div>
-            <form action="play.html" method="get">
+            <form action="/play" method="get">
                 <div className="form-group">
                 <label for="guess6">Guess SIX:</label>
                 <input type="text" className="form-control" id="guess6" placeholder="movie #6"/>
@@ -113,7 +113,7 @@ export function Play() {
             </form>
             </div>
             <div>
-            <form action="play.html" method="get">
+            <form action="/play" method="get">
                 <div className="form-group">
                 <label for="guess7">Guess SEVEN:</label>
                 <input type="text" className="form-control" id="guess7" placeholder="movie #7"/>
@@ -122,7 +122,7 @@ export function Play() {
             </form>
             </div>
             <div>
-            <form action="play.html" method="get">
+            <form action="/play" method="get">
                 <div className="form-group">
                 <label for="guess8">Guess EIGHT:</label>
                 <input type="text" className="form-control" id="guess8" placeholder="movie #8"/>
@@ -131,7 +131,7 @@ export function Play() {
             </form>
             </div>
             <div>
-            <form action="play.html" method="get">
+            <form action="/play" method="get">
                 <div className="form-group">
                 <label for="guess9">Guess NINE:</label>
                 <input type="text" className="form-control" id="guess9" placeholder="movie #9"/>
@@ -140,7 +140,7 @@ export function Play() {
             </form>
             </div>
             <div>
-            <form action="play.html" method="get">
+            <form action="/play" method="get">
                 <div className="form-group">
                 <label for="guess10">Guess TEN:</label>
                 <input type="text" className="form-control" id="guess10" placeholder="movie #10"/>
