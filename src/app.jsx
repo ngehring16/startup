@@ -4,47 +4,71 @@ import './app.css';
 import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
 import { Login } from './login/login';
 import { Play } from './play/play';
+import { AuthState } from './login/authstate';
 import { Scores } from './scores/scores';
 
-export default function App() {
-  return (
-    <BrowserRouter>
-        <div className="body bg-dark text-light">
-            <header className="container-fluid">
-            <nav className="navbar fixed-top navbar-dark">
-                <NavLink className="navbar-brand" to="/">MovieMaze<sup>&reg;</sup></NavLink>
-                <menu className="navbar-nav">
-                <li className="nav-item">
-                    <NavLink className="nav-link" to="/">Home</NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink className="nav-link" to="/play">Play</NavLink>
-                </li>
-                <li className="nav-item">
-                    <NavLink className="nav-link" to="/scores">Leaderboard</NavLink>
-                </li>
-                </menu>
-            </nav>
-            </header>
+function App() {
+    const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
+    const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
+    const [authState, setAuthState] = React.useState(currentAuthState);
 
-            <Routes>
-                <Route path='/' element={<Login />} />
-                <Route path='/play' element={<Play />} />
-                <Route path='/scores' element={<Scores />} />
-                <Route path='*' element={<NotFound />} />
-            </Routes>
+    return (
+        <BrowserRouter>
+            <div className="body bg-dark text-light">
+                <header className="container-fluid">
+                <nav className="navbar fixed-top navbar-dark">
+                    <NavLink className="navbar-brand" to="/">MovieMaze<sup>&reg;</sup></NavLink>
+                    <menu className="navbar-nav">
+                    <li className="nav-item">
+                        <NavLink className="nav-link" to="/">Home</NavLink>
+                    </li>
+                    {authState === AuthState.Authenticated && (
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="/play">Play</NavLink>
+                        </li>
+                    )}
+                    {authState === AuthState.Authenticated && (
+                        <li className="nav-item">
+                            <NavLink className="nav-link" to="/scores">Leaderboard</NavLink>
+                        </li>
+                    )}
+                    </menu>
+                </nav>
+                </header>
 
-            <footer className="bg-dark text-white-50">
-            <div className="container-fluid">
-                <span className="text-reset">Nathan Gehring</span>
-                <NavLink className="text-reset" to="https://github.com/ngehring16/startup">GitHub</NavLink>
+                <Routes>
+                    <Route
+                        path='/'
+                        element={
+                        <Login
+                            userName={userName}
+                            authState={authState}
+                            onAuthChange={(userName, authState) => {
+                            setAuthState(authState);
+                            setUserName(userName);
+                            }}
+                        />
+                        }
+                        exact
+                    />
+                    <Route path='/play' element={<Play userName={userName} />} />
+                    <Route path='/scores' element={<Scores />} />
+                    <Route path='*' element={<NotFound />} />
+                </Routes>
+
+                <footer className="bg-dark text-white-50">
+                <div className="container-fluid">
+                    <span className="text-reset">Nathan Gehring</span>
+                    <NavLink className="text-reset" to="https://github.com/ngehring16/startup">GitHub</NavLink>
+                </div>
+                </footer>
             </div>
-            </footer>
-        </div>
-    </BrowserRouter>
-  );
+        </BrowserRouter>
+    );
 }
 
 function NotFound() {
   return <main className="container-fluid bg-secondary text-center">404: Return to sender. Address unknown.</main>;
 }
+
+export default App;
