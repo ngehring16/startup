@@ -10,7 +10,7 @@ export function Login({userName, authState, onAuthChange}) {
         {authState !== AuthState.Unknown && <h1>Lets play MovieMaze!</h1>}
         {authState ===AuthState.Authenticated && (
           <Authenticated userName={userName} onLogout={() => onAuthChange(userName, AuthState.Unauthenticated)} />
-        )}a
+        )}
         {authState === AuthState.Unauthenticated && (
           <Unauthenticated
             userName={userName}
