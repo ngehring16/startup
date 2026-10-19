@@ -52,3 +52,5 @@ const imdbTop250Ids = [
 ]
 
 const IDset = new Set(imdbTop250Ids)
+
+export default imdbTop250Ids;
