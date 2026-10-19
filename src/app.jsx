@@ -11,12 +11,11 @@ function App() {
     const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
     const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
     const [authState, setAuthState] = React.useState(currentAuthState);
-
     return (
         <BrowserRouter>
             <div className="body bg-dark text-light">
                 <header className="container-fluid">
-                <nav className="navbar fixed-top navbar-dark">
+                <nav className="navbar fixed-top navbar-dark bg-dark">
                     <NavLink className="navbar-brand" to="/">MovieMaze<sup>&reg;</sup></NavLink>
                     <menu className="navbar-nav">
                     <li className="nav-item">
@@ -71,4 +70,4 @@ function NotFound() {
   return <main className="container-fluid bg-secondary text-center">404: Return to sender. Address unknown.</main>;
 }
 
-export default App;
+export default App
