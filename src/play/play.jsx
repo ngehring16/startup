@@ -3,8 +3,6 @@ import './play.css';
 import Idset from './imdbIds'
 
 const API_KEY = "20a57fb1"
-const first_movie = retreiveMovie("the shawshank redemption")
-const last_movie = retreiveMovie("the godfather")
 const score = 0
 
 class Movie {
@@ -30,6 +28,13 @@ async function retreiveMovie(guess) {
 export function Play() {
     const [guesses, setGuesses] = React.useState([]);
     const [error, setError] = React.useState('');
+    const [first_movie, setFirstMovie] = React.useState(null);
+    const [last_movie, setLastMovie] = React.useState(null);
+
+    React.useEffect(() => {
+        retreiveMovie("the shawshank redemption").then(setFirstMovie);
+        retreiveMovie("the godfather").then(setLastMovie);
+    }, []);
 
     async function onPressed(e) {
         e.preventDefault();                                 
@@ -75,6 +80,8 @@ export function Play() {
         
          
     }
+
+    if (!first_movie || !last_movie) return <main>Loading...</main>;
 
     return (
         <main>
