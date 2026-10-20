@@ -3,7 +3,6 @@ import './play.css';
 import Idset from './imdbIds'
 
 const API_KEY = "20a57fb1"
-const score = 0
 
 class Movie {
   constructor(title, director, actors, year, id, poster) {
@@ -24,8 +23,9 @@ async function retreiveMovie(guess) {
         return null;
     return new Movie(data.Title, data.Director, data.Actors, data.Year, data.imdbID, data.Poster)
 }
-
+const NUMBER_WORDS = ['ONE','TWO','THREE','FOUR','FIVE','SIX','SEVEN','EIGHT','NINE','TEN'];
 export function Play() {
+    const [score, setScore] = React.useState(0);
     const [guesses, setGuesses] = React.useState([]);
     const [error, setError] = React.useState('');
     const [first_movie, setFirstMovie] = React.useState(null);
@@ -37,49 +37,57 @@ export function Play() {
     }, []);
 
     async function onPressed(e) {
-        e.preventDefault();                                 
-        const guess = e.target.elements[0].value;           
-        if (!guess.trim()) return;
+        e.preventDefault();                          // stop the form from reloading the page
+        const guess = e.target.elements[0].value;    // get the text the player typed
+        if (!guess.trim()) return;                   // if it's empty, do nothing
 
         try {
-            const movie = await retreiveMovie(guess);
-            if (!movie) {
-                setError(`Couldn't find "${guess}"`);
+            const movie = await retreiveMovie(guess);   // ask the API for that movie
+            if (!movie) {                               // API found nothing
+                setError(`Couldn't find "${guess}"`);   // show a message
+                return;                                 // stop here
+            }
+
+            // Which movie are we comparing against?
+            // If they've guessed before, use their last guess. Otherwise use the starting movie.
+            let previous;
+            if (guesses.length > 0) {
+                previous = guesses[guesses.length - 1];
+            } else {
+                previous = first_movie;
+            }
+
+            // Same movie twice is not allowed
+            if (movie.id === previous.id) {
+                setError('Invalid selection');
                 return;
             }
-            setError('');
-            setGuesses(prev => [...prev, movie]);              
-            e.target.reset();                                
-        } 
-        catch {
-            setError('Network error, try again.');
+
+            // Add up points for each thing the two movies share
+            let points = 0;
+            if (movie.director === previous.director) points += 20;
+            if (movie.year === previous.year)         points += 10;
+
+            // Actors: check if ANY actor appears in both casts
+            const oldCast = previous.actors.split(', ');
+            const shared = movie.actors.split(', ').some(a => oldCast.includes(a));
+            if (shared) points += 40;
+
+            // Nothing in common means it's not a valid move
+            if (points === 0) {
+                setError('Invalid selection');
+                return;
+            }
+
+            // Everything passed, so save the results
+            setError('');                            // clear any old error
+            setScore(score + points);                // add the points to the total
+            setGuesses([...guesses, movie]);         // add this movie to the guess list
+            e.target.reset();                        // clear the text box
+        } catch {
+            setError('Network error, try again.');   // something went wrong with the request
         }
-        const previous_film = Movie;
-        const current_film = guesses[guesses.length-1];
-        Idset.push(current_film);
-        if (guesses.length == 1){
-            previous_film = first_movie;
-        }
-        else{
-            previous_film = guesses[guesses.length - 2];
-        }
-        if(current_film.title == previous_film.title)
-            setError('Invalid selection');
-        
-        if(current_film.director == previous_film.director)
-            score += 20;
-        
-        if(current_film.actors == previous_film.actors)
-            score += 40;
-        
-        if(current_film.year == previous_film.year)
-            score += 10;
-        
-        else
-            setError('Invalid selection');
-        
-         
-    }
+}
 
     if (!first_movie || !last_movie) return <main>Loading...</main>;
 
@@ -92,7 +100,7 @@ export function Play() {
                 </div>
                 <div>
                     <label for="count">Score</label>
-                    <input type="text" id="count" value="--" readonly />
+                    <input type="text" id="count" value={score} readonly />
                 </div>
                 <div>
                     <label for="count">HighScore</label>
@@ -133,128 +141,39 @@ export function Play() {
                 </div>
                 </div>
             </div>
-            </div>
 
             <br />
             <br />
 
             <div className="guesses">
-            <div className="selectors">
-                <div>
-                <form onSubmit={onPressed}>
-                    <div className="form-group">
-                    <label for="guess1">Guess ONE:</label>
-                    <input type="text" className="form-control" id="guess1" placeholder="a minecraft movie"/>
-                    <button type="submit" className="btn btn-primary">Submit</button>
-                    </div>
-                </form>
+                <div className="selectors">
+                    {guesses.length < 10 && (
+                        <form onSubmit={onPressed}>
+                            <div className="form-group">
+                                <label htmlFor="guess">Guess {NUMBER_WORDS[guesses.length]}:</label>
+                                <input type="text" className="form-control" id="guess"
+                                    placeholder={`movie #${guesses.length + 1}`} />
+                                <button type="submit" className="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    )}
                 </div>
-                <div>
-                <form onSubmit={onPressed}>
-                    <div className="form-group">
-                    <label for="guess2">Guess TWO:</label>
-                    <input type="text" className="form-control" id="guess2" placeholder="song sung blue"/>
-                    <button type="submit" className="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-                </div>
-                <div>
-                <form onSubmit={onPressed}>
-                    <div className="form-group">
-                    <label for="guess3">Guess THREE:</label>
-                    <input type="text" className="form-control" id="guess3" placeholder="movie #3"/>
-                    <button type="submit" className="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-                </div>
-                <div>
-                <form onSubmit={onPressed}>
-                    <div className="form-group">
-                    <label for="guess4">Guess FOUR:</label>
-                    <input type="text" className="form-control" id="guess4" placeholder="movie #4"/>
-                    <button type="submit" className="btn btn-primary">Submit</button>
-                    </div>  
-                </form>
-                </div>
-                <div>
-                <form onSubmit={onPressed}>
-                    <div className="form-group">
-                    <label for="guess5">Guess FIVE:</label>
-                    <input type="text" className="form-control" id="guess5" placeholder="movie #5"/>
-                    <button type="submit" className="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-                </div>
-                <div>
-                <form onSubmit={onPressed}>
-                    <div className="form-group">
-                    <label for="guess6">Guess SIX:</label>
-                    <input type="text" className="form-control" id="guess6" placeholder="movie #6"/>
-                    <button type="submit" className="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-                </div>
-                <div>
-                <form onSubmit={onPressed}>
-                    <div className="form-group">
-                    <label for="guess7">Guess SEVEN:</label>
-                    <input type="text" className="form-control" id="guess7" placeholder="movie #7"/>
-                    <button type="submit" className="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-                </div>
-                <div>
-                <form onSubmit={onPressed}>
-                    <div className="form-group">
-                    <label for="guess8">Guess EIGHT:</label>
-                    <input type="text" className="form-control" id="guess8" placeholder="movie #8"/>
-                    <button type="submit" className="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-                </div>
-                <div>
-                <form onSubmit={onPressed}>
-                    <div className="form-group">
-                    <label for="guess9">Guess NINE:</label>
-                    <input type="text" className="form-control" id="guess9" placeholder="movie #9"/>
-                    <button type="submit" className="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-                </div>
-                <div>
-                <form onSubmit={onPressed}>
-                    <div className="form-group">
-                    <label for="guess10">Guess TEN:</label>
-                    <input type="text" className="form-control" id="guess10" placeholder="movie #10"/>
-                    <button type="submit" className="btn btn-primary">Submit</button>
-                    </div>
-                </form>
-                </div>
-            </div>
-            <div className="information-2">
-                <div className="movie-info">
-                <div className="movie-title">
-                        <p> A Minecraft Movie </p>
-                    </div>
-                    <div className="movie-stats">
-                        <p>2025</p>
-                        <p>Jason Momoa, Jack Black, Sebastian Hansen</p>
-                        <p>Jared Hess</p>
-                    </div>
-                </div>
-                <div className="movie-info">
-                <div className="movie-title">
-                        <p> Song Sung Blue </p>
-                    </div>
-                    <div className="movie-stats">
-                        <p>2025</p>
-                        <p>Hugh Jackman, Kate Hudson, Ella Anderson</p>
-                        <p>Craig Brewer</p>
-                    </div>
+                <div className="information-2">
+                    {guesses.map(m => (
+                        <div className="movie-info" key={m.id}>
+                            <div className="movie-title"><p>{m.title}</p></div>
+                            <div className="movie-stats">
+                                <p>{m.year}</p>
+                                <p>{m.actors}</p>
+                                <p>{m.director}</p>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </div>
             </div>
             <div className="solved-message">
+                {error && <p className="error">{error}</p>}
             <div className="congrats">
                 CONGRATS:
                 <span className="message">You solved the MovieMaze in TWO guesses!</span>
