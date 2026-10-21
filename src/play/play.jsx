@@ -5,7 +5,7 @@ import { PuzzleState } from './puzzleState';
 import { Unsolved } from './unsolved';
 import { Solved } from './solved';
 import { getDailyIds } from './dailyPuzzle';
-import { GameNotifier } from './gameNotifier';
+import { GameEvent, GameNotifier } from './gameNotifier';
 
 const API_KEY = "20a57fb1";
 
@@ -26,6 +26,16 @@ async function retreiveMovie(kind, guess) {
     if (data.Response === 'False')
         return null;
     return new Movie(data.Title, data.Director, data.Actors, data.Year, data.imdbID, data.Poster)
+}
+
+function saveScore(userName, score, guesses) {
+    const date = new Date().toLocaleDateString();
+    const newScore = { name: userName, score: score, date: date , guesses: guesses};
+
+        // Let other players know the game has concluded
+    GameNotifier.broadcastEvent(userName, GameEvent.End, newScore);
+
+    updateScoresLocal(newScore);
 }
 
 function updateScoresLocal(newScore) {
@@ -53,16 +63,6 @@ function updateScoresLocal(newScore) {
     }
 
     localStorage.setItem('scores', JSON.stringify(scores));
-}
-
-async function saveScore(userName, score) {
-    const date = new Date().toLocaleDateString();
-    const newScore = { name: userName, score: score, date: date };
-
-        // Let other players know the game has concluded
-    GameNotifier.broadcastEvent(userName, GameEvent.End, newScore);
-
-    updateScoresLocal(newScore);
 }
 
 export function Play(props) {
@@ -138,7 +138,7 @@ export function Play(props) {
                         setPuzzleState(PuzzleState.Solved);
                         const counter = Math.max(0, 1000 - guesses.length * 100);
                         newScore += counter;
-                        saveScore(props.userName, newScore);
+                        saveScore(props.userName, newScore, guesses.length + 1);
                         if (newScore > highscore) {                       // beat the old record?
                             setHighscore(newScore);                       // update what's on screen
                             localStorage.setItem(storageKey, newScore);   // save it for next time
