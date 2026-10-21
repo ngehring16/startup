@@ -26,7 +26,11 @@ async function retreiveMovie(kind, guess) {
     return new Movie(data.Title, data.Director, data.Actors, data.Year, data.imdbID, data.Poster)
 }
 
-export function Play() {
+export function Play(props) {
+    const storageKey = `highscore_${props.userName}`;
+    const [highscore, setHighscore] = React.useState(
+        Number(localStorage.getItem(storageKey)) || 0
+    );
     const [puzzleState, setPuzzleState] = React.useState(PuzzleState.UnSolved);
     const [score, setScore] = React.useState(0);
     const [guesses, setGuesses] = React.useState([]);
@@ -84,15 +88,24 @@ export function Play() {
                     const lastCast = last_movie.actors.split(', ');
                     const last_shared = movie.actors.split(', ').some(a => lastCast.includes(a));
         
-                    if ((movie.director === last_movie.director) || (movie.year === last_movie.year) || (last_shared)){
+                    const newScore = score + points;   // the total after this guess
+
+                    const won = (movie.director === last_movie.director)
+                            || (movie.year === last_movie.year)
+                            || last_shared;
+
+                    if (won) {
                         setPuzzleState(PuzzleState.Solved);
+
+                        if (newScore > highscore) {                       // beat the old record?
+                            setHighscore(newScore);                       // update what's on screen
+                            localStorage.setItem(storageKey, newScore);   // save it for next time
+                        }
                     }
-                        
-        
-                    // Everything passed, so save the results
-                    setError('');                            // clear any old error
-                    setScore(score + points);                // add the points to the total
-                    setGuesses([...guesses, movie]);         // add this movie to the guess list
+
+                    setError('');
+                    setScore(newScore);
+                    setGuesses([...guesses, movie]);
                     Idset.push(movie.id);
                     e.target.reset();                        // clear the text box
                 } catch {
@@ -108,7 +121,7 @@ export function Play() {
             <div className="scoresheet">
                 <div className="players">
                     Player:
-                    <span className="player-name">  Movie guy</span>
+                    <span className="player-name">   {props.userName}</span>
                 </div>
                 <div>
                     <label htmlFor="score">Score</label>
@@ -116,7 +129,7 @@ export function Play() {
                 </div>
                 <div>
                     <label htmlFor="highscore">HighScore</label>
-                    <input type="text" id="highscore" value="900" readOnly />
+                    <input type="text" id="highscore" value={highscore} readOnly />
                 </div>
             </div>
 
