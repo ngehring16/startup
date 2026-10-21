@@ -5,6 +5,7 @@ import { PuzzleState } from './puzzleState';
 import { Unsolved } from './unsolved';
 import { Solved } from './solved';
 import { getDailyIds } from './dailyPuzzle';
+import { GameNotifier } from './gameNotifier';
 
 const API_KEY = "20a57fb1";
 
@@ -25,6 +26,43 @@ async function retreiveMovie(kind, guess) {
     if (data.Response === 'False')
         return null;
     return new Movie(data.Title, data.Director, data.Actors, data.Year, data.imdbID, data.Poster)
+}
+
+function updateScoresLocal(newScore) {
+    let scores = [];
+    const scoresText = localStorage.getItem('scores');
+    if (scoresText) {
+    scores = JSON.parse(scoresText);
+    }
+
+    let found = false;
+    for (const [i, prevScore] of scores.entries()) {
+        if (newScore.score > prevScore.score) {
+            scores.splice(i, 0, newScore);
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
+        scores.push(newScore);
+    }
+
+    if (scores.length > 10) {
+        scores.length = 10;
+    }
+
+    localStorage.setItem('scores', JSON.stringify(scores));
+}
+
+async function saveScore(userName, score) {
+    const date = new Date().toLocaleDateString();
+    const newScore = { name: userName, score: score, date: date };
+
+        // Let other players know the game has concluded
+    GameNotifier.broadcastEvent(userName, GameEvent.End, newScore);
+
+    updateScoresLocal(newScore);
 }
 
 export function Play(props) {
@@ -100,10 +138,12 @@ export function Play(props) {
                         setPuzzleState(PuzzleState.Solved);
                         const counter = Math.max(0, 1000 - guesses.length * 100);
                         newScore += counter;
+                        saveScore(props.userName, newScore);
                         if (newScore > highscore) {                       // beat the old record?
                             setHighscore(newScore);                       // update what's on screen
                             localStorage.setItem(storageKey, newScore);   // save it for next time
                         }
+
                     }
 
                     setError('');
@@ -114,7 +154,6 @@ export function Play(props) {
                     setError('Network error, try again.');   // something went wrong with the request
                 }
     }
-
     if (!first_movie || !last_movie) return <main>Loading...</main>;
 
     return (

@@ -2,6 +2,8 @@ import React from 'react';
 import './scores.css';
 
 export function Scores() {
+
+  
   return (
     <main className="container-fluid bg-secondary">
       <table className="table table-dark table-striped-columns">
