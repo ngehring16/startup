@@ -22,7 +22,7 @@ class GameEventNotifier {
       const score = Math.floor(Math.random() * 3000);
       const date = new Date().toLocaleDateString();
       const userName = 'Cary Grant';
-      this.broadcastEvent(userName, GameEvent.End, { name: userName, score: score, date: date });
+      this.broadcastEvent(userName, GameEvent.End, { name: userName, score: score, date: date, guesses: Math.floor(Math.random() * 9) + 1});
     }, 5000);
   }
 

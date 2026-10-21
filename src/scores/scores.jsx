@@ -1,9 +1,24 @@
 import React from 'react';
 import './scores.css';
+import { GameEvent, GameNotifier } from '../play/gameNotifier';
 
 export function Scores() {
   const [scores, setScores] = React.useState([]);
+  const [events, setEvents] = React.useState([]);
 
+  React.useEffect(() => {
+    setEvents([...GameNotifier.events]);
+
+    function handleEvent(event) {
+      setEvents((prev) => [...prev, event]);
+    }
+
+    GameNotifier.addHandler(handleEvent);
+
+    return () => {
+      GameNotifier.removeHandler(handleEvent);
+    };
+  }, []);
   // Demonstrates calling a service asynchronously so that
   // React can properly update state objects with the results.
   React.useEffect(() => {
@@ -15,6 +30,16 @@ export function Scores() {
 
   // Demonstrates rendering an array with React
   const scoreRows = [];
+  const messages = events.slice(-10).map((event, i) => {
+  if (event.type === GameEvent.End) {
+    return (
+      <li key={i} className="player-name">
+        {event.from.split('@')[0]} solved the MovieMaze! They scored {event.value.score} with {event.value.guesses} guesses
+      </li>
+    );
+  }
+  return null;
+  });
   if (scores.length) {
     for (const [i, score] of scores.entries()) {
       scoreRows.push(
@@ -55,9 +80,7 @@ export function Scores() {
         <div className="title">
           <p>LIVE UPDATES</p>
         </div>
-        <li className="player-name">Cary Grant scored 500 with 9 guesses</li>
-        <li className="player-name">Anya Taylor Joy scored 900 with 4 guesses </li>
-        <li className="player-name">Vito scored 2000 with 4 guesses</li>
+        {messages}
       </ul>
       <br />
     </main>
