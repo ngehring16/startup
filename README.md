@@ -105,9 +105,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [ ] **All functionality implemented or mocked out** - I did not complete this part of the deliverable.
-- [ ] **Hooks** - I did not complete this part of the deliverable.
+- [X] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
+- [X] **All functionality implemented or mocked out** - I went ahead and added the api implimentation already as my guessing game does not really work without pulling from and checking against the api. You can now functionally play a new puzzle each day and make guesses that disply proper information if the guess is valid. The game keeps track of points and stores it in the leaderboard as well as keeping track of your highscore. 
+- [X] **Hooks** - used usestate to hold multiple variables like scores and highscore and guesses. Also used useEffect in a few places including to pull the two films for the puzzle.
 
 ## 🚀 Service deliverable
 
