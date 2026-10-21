@@ -40,9 +40,9 @@ export function Play(props) {
     const [last_movie, setLastMovie] = React.useState(null);
 
     React.useEffect(() => {
-        const {firstid, lastid} = getDailyIds(Idset)
-        retreiveMovie("i", firstid).then(setFirstMovie);
-        retreiveMovie("i", lastid).then(setLastMovie);
+        const {firstId, lastId} = getDailyIds(Idset)
+        retreiveMovie("i", firstId).then(setFirstMovie);
+        retreiveMovie("i", lastId).then(setLastMovie);
     }, []);
 
     async function onPressed(e) {
@@ -90,7 +90,7 @@ export function Play(props) {
                     const lastCast = last_movie.actors.split(', ');
                     const last_shared = movie.actors.split(', ').some(a => lastCast.includes(a));
         
-                    const newScore = score + points;   // the total after this guess
+                    let newScore = score + points;   // the total after this guess
 
                     const won = (movie.director === last_movie.director)
                             || (movie.year === last_movie.year)
@@ -98,7 +98,8 @@ export function Play(props) {
 
                     if (won) {
                         setPuzzleState(PuzzleState.Solved);
-
+                        const counter = Math.max(0, 1000 - guesses.length * 100);
+                        newScore += counter;
                         if (newScore > highscore) {                       // beat the old record?
                             setHighscore(newScore);                       // update what's on screen
                             localStorage.setItem(storageKey, newScore);   // save it for next time
