@@ -4,6 +4,7 @@ import Idset from './imdbIds';
 import { PuzzleState } from './puzzleState';
 import { Unsolved } from './unsolved';
 import { Solved } from './solved';
+import { getDailyIds } from './dailyPuzzle';
 
 const API_KEY = "20a57fb1";
 
@@ -39,8 +40,9 @@ export function Play(props) {
     const [last_movie, setLastMovie] = React.useState(null);
 
     React.useEffect(() => {
-        retreiveMovie("i", "tt0133093").then(setFirstMovie);
-        retreiveMovie("i", "tt0073486").then(setLastMovie);
+        const {firstid, lastid} = getDailyIds(Idset)
+        retreiveMovie("i", firstid).then(setFirstMovie);
+        retreiveMovie("i", lastid).then(setLastMovie);
     }, []);
 
     async function onPressed(e) {
@@ -106,7 +108,6 @@ export function Play(props) {
                     setError('');
                     setScore(newScore);
                     setGuesses([...guesses, movie]);
-                    Idset.push(movie.id);
                     e.target.reset();                        // clear the text box
                 } catch {
                     setError('Network error, try again.');   // something went wrong with the request
