@@ -1,6 +1,19 @@
 import React from 'react';
+import Button from 'react-bootstrap/Button';
 
 export function Solved({ first_movie, last_movie, guesses }) {
+    const [copied, setCopied] = React.useState(false);
+
+    async function handleCopy() {
+        try {
+            await navigator.clipboard.writeText(`I solved MovieMaze in ${guesses.length} guesses! Give it a try: https://startup.moviemaze.click/`);
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+        } catch {
+            // ignore
+        }
+    }
+
     return (
         <div>
             <div className="solved-message">
@@ -29,6 +42,11 @@ export function Solved({ first_movie, last_movie, guesses }) {
                 <div className="ended-poster">
                     <img className="ended" alt={last_movie.title} src={last_movie.poster} />
                 </div>
+            </div>
+            <br />
+            <br/>
+            <div>
+                <Button variant='primary' onClick={handleCopy}>{copied ? 'Copied!' : 'SHARE'}</Button>
             </div>
         </div>
     );
