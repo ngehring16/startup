@@ -76,6 +76,9 @@ export function Scores() {
         <tbody id='scores'>{scoreRows}</tbody>
       </table>
 
+      <br />
+      <br/>
+
       <ul className="notification">
         <div className="title">
           <p>LIVE UPDATES</p>

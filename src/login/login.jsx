@@ -7,7 +7,7 @@ export function Login({userName, authState, onAuthChange}) {
   return (
     <main className="container-fluid bg-secondary text-center">
       <div>
-        {authState !== AuthState.Unknown && <h1>Lets play MovieMaze!</h1>}
+        {authState !== AuthState.Unknown && <h1>CAN YOU SOLVE THE MOVIEMAZE?</h1>}
         {authState ===AuthState.Authenticated && (
           <Authenticated userName={userName} onLogout={() => onAuthChange(userName, AuthState.Unauthenticated)} />
         )}
