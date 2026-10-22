@@ -49,6 +49,11 @@ export function Unsolved({ first_movie, last_movie, guesses, error, onPressed })
                             </div>
                         </form>
                     )}
+                    {guesses.length === 10 && (
+                        <div className="failed_message">
+                            <p>Look's like you got lost in the MOVIEMAZE!</p>
+                        </div>
+                    )}
                 </div>
                 <div className="information-2">
                     {guesses.map(m => (
