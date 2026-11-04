@@ -2,3 +2,12 @@
 .DS_Store
 node_modules
 apiKey.env
+/.pnp
+.pnp.js
+
+# production
+/build
+/dist
+
+npm-debug.log*
+dbConfig.json
