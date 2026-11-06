@@ -9,7 +9,7 @@ const authCookieName = 'token';
 // The scores and users are saved in memory and disappear whenever the service is restarted.
 let users = [];
 let scores = [];
-let highScores = [];
+let highScores = {};
 
 // The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 3000;
@@ -74,6 +74,11 @@ const verifyAuth = async (req, res, next) => {
   }
 };
 
+// Check whether the current cookie is still valid
+apiRouter.get('/auth/me', verifyAuth, (req, res) => {
+  res.send({ email: req.user.email });
+});
+
 // GetHighScore
 apiRouter.get('/highscore', verifyAuth, (req, res) => {
   res.send({ highscore: highScores[req.user.email] || 0 });
@@ -91,12 +96,6 @@ apiRouter.post('/score', verifyAuth, (req, res) => {
 
 // GetScores
 apiRouter.get('/scores', verifyAuth, (_req, res) => {
-  res.send(scores);
-});
-
-// SubmitScore
-apiRouter.post('/score', verifyAuth, (req, res) => {
-  scores = updateScores(req.body);
   res.send(scores);
 });
 

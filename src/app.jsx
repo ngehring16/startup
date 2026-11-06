@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css';
-import { BrowserRouter, NavLink, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, NavLink, Route, Routes, Navigate } from 'react-router-dom';
 import { Login } from './login/login';
 import { Play } from './play/play';
 import { AuthState } from './login/authstate';
@@ -9,8 +9,21 @@ import { Scores } from './scores/scores';
 
 function App() {
     const [userName, setUserName] = React.useState(localStorage.getItem('userName') || '');
-    const currentAuthState = userName ? AuthState.Authenticated : AuthState.Unauthenticated;
-    const [authState, setAuthState] = React.useState(currentAuthState);
+    const [authState, setAuthState] = React.useState(AuthState.Unknown);
+
+    React.useEffect(() => {
+        fetch('/api/auth/me')
+            .then((response) => {
+                if (response.ok) {
+                    setAuthState(AuthState.Authenticated);
+                } else {
+                    localStorage.removeItem('userName');
+                    setAuthState(AuthState.Unauthenticated);
+                }
+            })
+            .catch(() => setAuthState(AuthState.Unauthenticated));
+    }, []);
+
     return (
         <BrowserRouter>
             <div className="body bg-dark text-light">
@@ -50,8 +63,16 @@ function App() {
                         }
                         exact
                     />
-                    <Route path='/play' element={<Play userName={userName} />} />
-                    <Route path='/scores' element={<Scores />} />
+                    <Route path='/play' element={
+                        <RequireAuth authState={authState}>
+                            <Play userName={userName} />
+                        </RequireAuth>
+                    } />
+                    <Route path='/scores' element={
+                        <RequireAuth authState={authState}>
+                            <Scores />
+                        </RequireAuth>
+                    } />
                     <Route path='*' element={<NotFound />} />
                 </Routes>
 
@@ -68,6 +89,12 @@ function App() {
 
 function NotFound() {
   return <main className="container-fluid bg-secondary text-center">404: Return to sender. Address unknown.</main>;
+}
+
+function RequireAuth({ authState, children }) {
+    if (authState === AuthState.Unknown) return null;   // still asking the server
+    if (authState !== AuthState.Authenticated) return <Navigate to='/' replace />;
+    return children;
 }
 
 export default App

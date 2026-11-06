@@ -42,10 +42,7 @@ function saveScore(userName, score, guesses) {
 }
 
 export function Play(props) {
-    const storageKey = `highscore_${props.userName}`;
-    const [highscore, setHighscore] = React.useState(
-        Number(localStorage.getItem(storageKey)) || 0
-    );
+    const [highscore, setHighscore] = React.useState(0);
     const [puzzleState, setPuzzleState] = React.useState(PuzzleState.UnSolved);
     const [score, setScore] = React.useState(0);
     const [guesses, setGuesses] = React.useState([]);
@@ -58,6 +55,13 @@ export function Play(props) {
         retreiveMovie("i", firstId).then(setFirstMovie);
         retreiveMovie("i", lastId).then(setLastMovie);
     }, []);
+
+    React.useEffect(() => {
+    fetch('/api/highscore')
+        .then((response) => response.json())
+        .then((data) => setHighscore(data.highscore || 0))
+        .catch(() => {});
+}, []);
 
     async function onPressed(e) {
                 e.preventDefault();                          // stop the form from reloading the page
@@ -117,7 +121,6 @@ export function Play(props) {
                         saveScore(props.userName, newScore, guesses.length + 1);
                         if (newScore > highscore) {                       // beat the old record?
                             setHighscore(newScore);                       // update what's on screen
-                            localStorage.setItem(storageKey, newScore);   // save it for next time
                         }
 
                     }
