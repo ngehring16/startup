@@ -113,14 +113,14 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [ ] **Node.js/Express HTTP service** - I did not complete this part of the deliverable.
-- [ ] **Static middleware for frontend** - I did not complete this part of the deliverable.
-- [ ] **Calls to third party endpoints** - I did not complete this part of the deliverable.
-- [ ] **Backend service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Frontend calls service endpoints** - I did not complete this part of the deliverable.
-- [ ] **Supports registration, login, logout, and restricted endpoint** - I did not complete this part of the deliverable.
-- [ ] **Uses BCrypt to hash passwords** - I did not complete this part of the deliverable.
+- [X] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
+- [X] **Node.js/Express HTTP service** - I implimented the http service using node.js
+- [X] **Static middleware for frontend** - I included static middleware to connect my frontend.
+- [X] **Calls to third party endpoints** - I included multiple calls to third party endpoints with the omdb api
+- [X] **Backend service endpoints** - I included all essential backend service endpoints
+- [X] **Frontend calls service endpoints** - I included all essential calls in the frontend to service endpoints
+- [X] **Supports registration, login, logout, and restricted endpoint** - I tested and proved functionality for all of these essential fucntions including error messages to improve user experience.
+- [X] **Uses BCrypt to hash passwords** - I used BCrypt to hash the passwords in order to improve security
 
 ## 🚀 DB deliverable
 
