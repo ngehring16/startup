@@ -17,21 +17,32 @@ export function Unauthenticated(props) {
     }
 
     async function loginOrCreate(endpoint) {
-      const response = await fetch(endpoint, {
-        method: 'post',
-        body: JSON.stringify({ email: userName, password: password }),
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-        },
-      });
-      if (response?.status === 200) {
-        localStorage.setItem('userName', userName);
-        props.onLogin(userName);
-      } else {
-        const body = await response.json();
-        setDisplayError(`⚠ Error: ${body.msg}`);
-      }
+  try {
+    const response = await fetch(endpoint, {
+      method: 'post',
+      body: JSON.stringify({ email: userName, password: password }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+      signal: AbortSignal.timeout(8000),
+    });
+
+    if (response.ok) {
+      localStorage.setItem('userName', userName);
+      props.onLogin(userName);
+      return;
     }
+
+    const body = await response.json().catch(() => ({}));
+    setDisplayError(`⚠ ${body.msg || `Something went wrong (error ${response.status})`}`);
+  } catch (err) {
+    if (err.name === 'TimeoutError') {
+      setDisplayError('⚠ The server took too long to respond. Please try again.');
+    } else {
+      setDisplayError("⚠ Can't reach the server. Check your connection and try again.");
+    }
+  }
+}
 
     return (
         <>
