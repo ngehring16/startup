@@ -2,14 +2,10 @@ const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const express = require('express');
 const uuid = require('uuid');
+const DB = require('./database.js');  
 const app = express();
 
 const authCookieName = 'token';
-
-// The scores and users are saved in memory and disappear whenever the service is restarted.
-let users = [];
-let scores = [];
-let highScores = {};
 
 // The service port. In production the front-end code is statically hosted by the service on the same port.
 const port = process.argv.length > 2 ? process.argv[2] : 4000;
@@ -29,35 +25,41 @@ app.use(`/api`, apiRouter);
 
 // CreateAuth a new user
 apiRouter.post('/auth/create', async (req, res) => {
-  if (await findUser('email', req.body.email)) {
-    res.status(409).send({ msg: 'Existing user' });
-  } else {
-    const user = await createUser(req.body.email, req.body.password);
-
-    setAuthCookie(res, user.token);
-    res.send({ email: user.email });
+  if (!req.body.email || !req.body.password) {
+    return res.status(400).send({ msg: 'Email and password are required' });
   }
+  if (await DB.getUser(req.body.email)) {
+    return res.status(409).send({ msg: 'An account with that email already exists' });
+  }
+  const user = await createUser(req.body.email, req.body.password);
+  setAuthCookie(res, user.token);
+  res.send({ email: user.email });
 });
 
 // GetAuth login an existing user
 apiRouter.post('/auth/login', async (req, res) => {
-  const user = await findUser('email', req.body.email);
-  if (user) {
-    if (await bcrypt.compare(req.body.password, user.password)) {
-      user.token = uuid.v4();
-      setAuthCookie(res, user.token);
-      res.send({ email: user.email });
-      return;
-    }
+  if (!req.body.email || !req.body.password) {
+    return res.status(400).send({ msg: 'Email and password are required' });
   }
-  res.status(401).send({ msg: 'Unauthorized' });
+  const user = await DB.getUser(req.body.email);
+  if (!user) {
+    return res.status(404).send({ msg: 'No account found with that email' });
+  }
+  if (!(await bcrypt.compare(req.body.password, user.password))) {
+    return res.status(401).send({ msg: 'Incorrect password' });
+  }
+  user.token = uuid.v4();
+  await DB.updateUser(user);
+  setAuthCookie(res, user.token);
+  res.send({ email: user.email });
 });
 
 // DeleteAuth logout a user
 apiRouter.delete('/auth/logout', async (req, res) => {
-  const user = await findUser('token', req.cookies[authCookieName]);
+  const user = await DB.getUserByToken(req.cookies[authCookieName]);
   if (user) {
     delete user.token;
+    await DB.updateUser(user);
   }
   res.clearCookie(authCookieName);
   res.status(204).end();
@@ -65,12 +67,12 @@ apiRouter.delete('/auth/logout', async (req, res) => {
 
 // Middleware to verify that the user is authorized to call an endpoint
 const verifyAuth = async (req, res, next) => {
-  const user = await findUser('token', req.cookies[authCookieName]);
+  const user = await DB.getUserByToken(req.cookies[authCookieName]);
   if (user) {
     req.user = user;
     next();
   } else {
-    res.status(401).send({ msg: 'Unauthorized' });
+    res.status(401).send({ msg: 'Please log in again' });
   }
 };
 
@@ -80,28 +82,26 @@ apiRouter.get('/auth/me', verifyAuth, (req, res) => {
 });
 
 // GetHighScore
-apiRouter.get('/highscore', verifyAuth, (req, res) => {
-  res.send({ highscore: highScores[req.user.email] || 0 });
+apiRouter.get('/highscore', verifyAuth, async (req, res) => {
+  res.send({ highscore: await DB.getHighScore(req.user.email) });
 });
 
 // SubmitScore
-apiRouter.post('/score', verifyAuth, (req, res) => {
-  const email = req.user.email;
-  if (req.body.score > (highScores[email] || 0)) {
-    highScores[email] = req.body.score;
-  }
-  scores = updateScores(req.body);
+apiRouter.post('/score', verifyAuth, async (req, res) => {
+  await DB.setHighScore(req.user.email, req.body.score);
+  const scores = await DB.addScore(req.body);
   res.send(scores);
 });
 
 // GetScores
-apiRouter.get('/scores', verifyAuth, (_req, res) => {
-  res.send(scores);
+apiRouter.get('/scores', verifyAuth, async (_req, res) => {
+  res.send(await DB.getScores());
 });
 
 // Default error handler
 app.use(function (err, req, res, next) {
-  res.status(500).send({ type: err.name, message: err.message });
+  console.error(err);
+  res.status(500).send({ msg: 'Something went wrong on the server' });
 });
 
 // Return the application's default page if the path is unknown
@@ -109,48 +109,17 @@ app.use((_req, res) => {
   res.sendFile('index.html', { root: 'public' });
 });
 
-// updateScores considers a new score for inclusion in the high scores.
-function updateScores(newScore) {
-  let found = false;
-  for (const [i, prevScore] of scores.entries()) {
-    if (newScore.score > prevScore.score) {
-      scores.splice(i, 0, newScore);
-      found = true;
-      break;
-    }
-  }
-
-  if (!found) {
-    scores.push(newScore);
-  }
-
-  if (scores.length > 10) {
-    scores.length = 10;
-  }
-
-  return scores;
-}
-
 async function createUser(email, password) {
   const passwordHash = await bcrypt.hash(password, 10);
-
   const user = {
     email: email,
     password: passwordHash,
     token: uuid.v4(),
   };
-  users.push(user);
-
+  await DB.addUser(user);
   return user;
 }
 
-async function findUser(field, value) {
-  if (!value) return null;
-
-  return users.find((u) => u[field] === value);
-}
-
-// setAuthCookie in the HTTP response
 function setAuthCookie(res, authToken) {
   res.cookie(authCookieName, authToken, {
     maxAge: 1000 * 60 * 60 * 24 * 365,
