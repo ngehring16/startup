@@ -30,39 +30,15 @@ async function retreiveMovie(kind, guess) {
 
 function saveScore(userName, score, guesses) {
     const date = new Date().toLocaleDateString();
-    const newScore = { name: userName, score: score, date: date , guesses: guesses};
+    const newScore = { name: userName, score: score, date: date, guesses: guesses };
 
-        // Let other players know the game has concluded
     GameNotifier.broadcastEvent(userName, GameEvent.End, newScore);
 
-    updateScoresLocal(newScore);
-}
-
-function updateScoresLocal(newScore) {
-    let scores = [];
-    const scoresText = localStorage.getItem('scores');
-    if (scoresText) {
-    scores = JSON.parse(scoresText);
-    }
-
-    let found = false;
-    for (const [i, prevScore] of scores.entries()) {
-        if (newScore.score > prevScore.score) {
-            scores.splice(i, 0, newScore);
-            found = true;
-            break;
-        }
-    }
-
-    if (!found) {
-        scores.push(newScore);
-    }
-
-    if (scores.length > 10) {
-        scores.length = 10;
-    }
-
-    localStorage.setItem('scores', JSON.stringify(scores));
+    fetch('/api/score', {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(newScore),
+    }).catch((err) => console.error('Could not save score', err));
 }
 
 export function Play(props) {
