@@ -89,13 +89,22 @@ apiRouter.get('/highscore', verifyAuth, async (req, res) => {
 // SubmitScore
 apiRouter.post('/score', verifyAuth, async (req, res) => {
   await DB.setHighScore(req.user.email, req.body.score);
-  const scores = await DB.addScore(req.body);
-  res.send(scores);
+  await DB.addScore(req.body);
+  res.send(await DB.getScores());
 });
 
 // GetScores
 apiRouter.get('/scores', verifyAuth, async (_req, res) => {
   res.send(await DB.getScores());
+});
+
+apiRouter.delete('/auth/logout', async (req, res) => {
+  const user = await DB.getUserByToken(req.cookies[authCookieName]);
+  if (user) {
+    await DB.updateUserRemoveAuth(user);
+  }
+  res.clearCookie(authCookieName);
+  res.status(204).end();
 });
 
 // Default error handler
