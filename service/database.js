@@ -13,7 +13,7 @@ const highscoreCollection = db.collection('highscore');
     await db.command({ ping: 1 });
     console.log(`Connect to database`);
   } catch (ex) {
-    console.log(`Unable to connect to database with ${url} because ${ex.message}`);
+    console.log(`Unable to connect to database because ${ex.message}`);
     process.exit(1);
   }
 })();
@@ -70,6 +70,7 @@ module.exports = {
   getUserByToken,
   addUser,
   updateUser,
+  updateUserRemoveAuth,
   getScores,
   addScore,
   getHighScore,

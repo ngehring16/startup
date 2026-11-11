@@ -58,8 +58,7 @@ apiRouter.post('/auth/login', async (req, res) => {
 apiRouter.delete('/auth/logout', async (req, res) => {
   const user = await DB.getUserByToken(req.cookies[authCookieName]);
   if (user) {
-    delete user.token;
-    await DB.updateUser(user);
+    await DB.updateUserRemoveAuth(user);
   }
   res.clearCookie(authCookieName);
   res.status(204).end();
@@ -96,15 +95,6 @@ apiRouter.post('/score', verifyAuth, async (req, res) => {
 // GetScores
 apiRouter.get('/scores', verifyAuth, async (_req, res) => {
   res.send(await DB.getScores());
-});
-
-apiRouter.delete('/auth/logout', async (req, res) => {
-  const user = await DB.getUserByToken(req.cookies[authCookieName]);
-  if (user) {
-    await DB.updateUserRemoveAuth(user);
-  }
-  res.clearCookie(authCookieName);
-  res.status(204).end();
 });
 
 // Default error handler
