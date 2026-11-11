@@ -3,7 +3,7 @@ const config = require('./dbConfig.json');
 
 const url = `mongodb+srv://${config.userName}:${config.password}@${config.hostname}`;
 const client = new MongoClient(url);
-const db = client.db('simon');
+const db = client.db('startup');
 const userCollection = db.collection('user');
 const scoreCollection = db.collection('score');
 const highscoreCollection = db.collection('highscore');
@@ -13,8 +13,7 @@ const highscoreCollection = db.collection('highscore');
     await db.command({ ping: 1 });
     console.log(`Connect to database`);
   } catch (ex) {
-    console.log(`Unable to connect to database because ${ex.message}`);
-    process.exit(1);
+    console.error(`Unable to connect to database: ${ex.message}`);
   }
 })();
 
