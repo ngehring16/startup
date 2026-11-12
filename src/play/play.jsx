@@ -92,13 +92,17 @@ export function Play(props) {
         
                     // Add up points for each thing the two movies share
                     let points = 0;
-                    if (movie.director === previous.director) points += 20;
+                    const oldDirector = previous.director.split(', ')
+                    const sharedDirector = movie.director.split(', ').some(a => oldDirector.includes(a));
+                    if (sharedDirector) points += 40;
                     if (movie.year === previous.year)         points += 10;
         
                     // Actors: check if ANY actor appears in both casts
                     const oldCast = previous.actors.split(', ');
                     const shared = movie.actors.split(', ').some(a => oldCast.includes(a));
-                    if (shared) points += 40;
+                    const shared_both = movie.actors.split(', ').some(a => oldDirector.includes(a));
+                    const shared_both_alt = movie.director.split(', ').some(a => oldCast.includes(a));
+                    if (shared || shared_both || shared_both_alt) points += 40;
         
                     // Nothing in common means it's not a valid move
                     if (points === 0) {
@@ -107,10 +111,12 @@ export function Play(props) {
                     }
                     const lastCast = last_movie.actors.split(', ');
                     const last_shared = movie.actors.split(', ').some(a => lastCast.includes(a));
+                    const lastDirector = last_movie.director.split(', ');
+                    const last_director_shared = (movie.director.split(', ').some(a => lastDirector.includes(a))) || (movie.actors.split(', ').some(a => lastDirector.includes(a))) || (movie.director.split(', ').some(a => lastCast.includes(a)));
         
                     let newScore = score + points;   // the total after this guess
 
-                    const won = (movie.director === last_movie.director)
+                    const won = (last_director_shared)
                             || (movie.year === last_movie.year)
                             || last_shared;
 
