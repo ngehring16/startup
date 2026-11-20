@@ -17,9 +17,8 @@ class GameEventNotifier {
   handlers = [];
 
   constructor() {
-   let port = window.location.port;
     const protocol = window.location.protocol === 'http:' ? 'ws' : 'wss';
-    this.socket = new WebSocket(`${protocol}://${window.location.hostname}:${port}/ws`);
+    this.socket = new WebSocket(`${protocol}://${window.location.host}/ws`);
     this.socket.onopen = (event) => {
       this.receiveEvent(new EventMessage('Simon', GameEvent.System, { msg: 'connected' }));
     };
@@ -28,9 +27,11 @@ class GameEventNotifier {
     };
     this.socket.onmessage = async (msg) => {
       try {
-        const event = JSON.parse(await msg.data.text());
-        this.receiveEvent(event);
-      } catch {}
+        const text = typeof msg.data === 'string' ? msg.data : await msg.data.text();
+        this.receiveEvent(JSON.parse(text));
+      } catch (e) {
+        console.error('Bad websocket message', e);
+      }
     };
   }
 
