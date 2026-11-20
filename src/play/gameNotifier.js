@@ -36,15 +36,17 @@ class GameEventNotifier {
 
   broadcastEvent(from, type, value) {
     const event = new EventMessage(from, type, value);
+    this.socket.send(JSON.stringify(event));
     this.receiveEvent(event);
   }
+
 
   addHandler(handler) {
     this.handlers.push(handler);
   }
 
   removeHandler(handler) {
-    this.handlers.filter((h) => h !== handler);
+    this.handlers = this.handlers.filter((h) => h !== handler);
   }
 
   receiveEvent(event) {
