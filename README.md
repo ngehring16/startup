@@ -134,9 +134,9 @@ For this deliverable I did the following. I checked the box `[x]` and added a de
 
 For this deliverable I did the following. I checked the box `[x]` and added a description for things I completed.
 
-- [ ] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
-- [ ] **Backend listens for WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Frontend makes WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **Data sent over WebSocket connection** - I did not complete this part of the deliverable.
-- [ ] **WebSocket data displayed** - I did not complete this part of the deliverable.
-- [ ] **Application is fully functional** - I did not complete this part of the deliverable.
+- [X] I completed the prerequisites for this deliverable (Simon deployed, GitHub link, Git commits)
+- [X] **Backend listens for WebSocket connection** - I added in necessary code to listen for webSocket connection
+- [X] **Frontend makes WebSocket connection** - I added the code needed to forge the websocket connection in my frontend
+- [X] **Data sent over WebSocket connection** - My messages and score data is sent across websocket
+- [X] **WebSocket data displayed** - my messages are displayed and the leaderboard is updated
+- [X] **Application is fully functional** - My application is fully playable and functional.
