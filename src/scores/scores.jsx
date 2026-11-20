@@ -7,28 +7,29 @@ export function Scores() {
   const [events, setEvents] = React.useState([]);
 
   React.useEffect(() => {
-    setEvents([...GameNotifier.events]);
+  setEvents([...GameNotifier.events]);
 
-    function handleEvent(event) {
-      setEvents((prev) => [...prev, event]);
-    }
-
-    GameNotifier.addHandler(handleEvent);
-
-    return () => {
-      GameNotifier.removeHandler(handleEvent);
-    };
-  }, []);
-  // Demonstrates calling a service asynchronously so that
-  // React can properly update state objects with the results.
-  React.useEffect(() => {
+  function loadScores() {
     fetch('/api/scores')
       .then((response) => response.json())
-      .then((scores) => {
-        setScores(scores);
-      });
-  }, []);
+      .then((scores) => setScores(scores))
+      .catch(() => {});
+  }
 
+  function handleEvent(event) {
+    setEvents((prev) => [...prev, event]);
+    if (event.type === GameEvent.End) {
+      loadScores();   // someone finished, so reload the table
+    }
+  }
+
+  loadScores();   // load the table when the page first opens
+  GameNotifier.addHandler(handleEvent);
+
+  return () => {
+    GameNotifier.removeHandler(handleEvent);
+  };
+}, []);
   // Demonstrates rendering an array with React
   const scoreRows = [];
   const messages = events.slice(-10).map((event, i) => {
